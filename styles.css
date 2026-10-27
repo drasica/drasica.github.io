@@ -684,3 +684,14 @@ html body .hero .header .menu-anchor .theme-toggle:hover { background: #ffffff15
 .menu-toggle[aria-expanded="true"] .menu-icon::after { width: 18px; transform: rotate(-45deg); }
 html body .hero .header .menu-anchor .language { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; }
 html body .hero .header .menu-anchor .language:hover { background: #ffffff15; }
+
+/* Wide screens: the content stays within 1600px, but the first-screen video or cover runs to the window's left edge and crops to fit. */
+@media (min-width: 1601px) {
+  .hero-canvas { --bleed: calc((100vw - 1600px) / 2); }
+  .hero-canvas > .hero-photo, .hero-canvas > .case-cover { left: calc(-1 * var(--bleed)); }
+  .hero-canvas > .hero-photo { width: calc(35.2778% + var(--bleed)); }
+  .hero-canvas > .case-cover { width: calc(35.2083% + var(--bleed)); }
+  .hero-canvas > .hero-ai-note { left: calc(16px - var(--bleed)); }
+  /* the wider frame trims the cover's top and bottom; keep the penthouse.ae mark at the top intact */
+  .penthouse-page .hero-canvas > .case-cover > img:first-child { object-position: center top; }
+}
