@@ -1,0 +1,97 @@
+.case-wrap { margin-inline: auto; }
+/* the whole first screen fits the window (like the home page), down to 640px tall */
+.enta-page .case-hero,.enta-page .case-hero .hero-canvas { height: clamp(640px, min(100svh, 59.375vw), 1040px); min-height: 0; max-height: 1040px; background: var(--cream); }
+.case-cover { position: absolute; inset: 0 auto 0 0; width: 35.2083%; }
+.case-cover>img:first-child { width:100%; height:100%; object-fit:cover; }
+/* Hero flyover: the clip carries its own ENTA logo, so it stays centred on the tower */
+.enta-page .case-cover>.tanu-cover-video,.enta-page .case-cover>.enta-cover-video { display:block; width:100%; height:100%; object-fit:cover; object-position:47% center; }
+.case-cover .enta-cover-logo { position:absolute; top:5.1%; left:21.1%; width:57.8%; }
+.enta-page .header { left:36.6%; right:8.333%; top:38px; }
+.case-breadcrumb { display:flex; gap:5px; align-items:center; white-space:nowrap; font-size:14px; }
+.case-breadcrumb a,.case-breadcrumb>span:first-of-type { color:var(--muted); }
+.case-breadcrumb a:hover { color:var(--ink); }
+.case-identity { position:absolute; top:35.1%; left:36.6%; width:24.3%; display:flex; align-items:center; gap:16px; }
+.case-identity>img { width:34.6%; }.case-identity>span{font-size:24px;font-weight:700;}
+.mpp-wordmark { position:relative; width:52.3%; aspect-ratio:183/34.29; flex-shrink:0; }
+.mpp-wordmark img:first-child { position:absolute;left:0;top:0;width:18.75%;height:100%; }
+.mpp-wordmark img:nth-child(2) { position:absolute;left:23.55%;top:22.28%;width:76.45%; }
+.mpp-wordmark img:nth-child(3) { position:absolute;left:23.54%;top:63.22%;width:55.85%; }
+[data-theme=dark] .case-identity img { filter:brightness(0) invert(.95); }
+.case-introduction { position:absolute; left:64.79%; top:34.27%; width:26.88%; font-size:clamp(21px,2.084vw,30px); line-height:1.2; font-weight:700; letter-spacing:-.02em; }
+.case-introduction h1 { position:static; font:inherit; margin:0; }
+.case-exclusive { color:var(--muted); }
+.case-tags { position:absolute; left:36.6%; bottom:38px; display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
+.case-tags span { border:1px dashed #c1cbd1; border-radius:8px; padding:11px; font-size:14px; }
+.case-meta { position:absolute; left:64.79%; right:5%; bottom:38px; font-size:14px; }.case-meta p+p{margin-top:10px;}
+.case-section { margin-block:200px; }.case-heading { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:100px; }
+.case-heading h2 { font-size:64px; line-height:1.1; white-space:pre-line; }
+.case-heading p { color:var(--muted); font-size:20px; line-height:1.2; padding-top:16px; }
+.case-stories { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.case-stories img,.case-artwork,.case-billboards img,.outdoor-grid img { width:100%;height:auto;border-radius:8px; }
+.case-outdoor { background:var(--cream); padding:100px 0; }
+.outdoor-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start; }
+.poster-one { grid-area:1/1/3/2; }.outdoor-label { grid-area:1/2; color:var(--muted);font-size:20px; }
+.poster-two { grid-area:2/2/4/3; margin-top:290px; }.outdoor-copy { grid-area:3/1;align-self:end;font-size:20px;line-height:1.2;color:var(--muted); }
+.billboard-pair { display:grid; grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;align-items:start; }.billboard-pair img:nth-child(2){margin-top:183px;}
+.billboard-caption { color:var(--muted);font-size:20px;margin-top:-24px; }
+.case-conclusion { width:calc(50% - 10px); margin:100px 0 0 auto; font-size:38px;line-height:1.1;letter-spacing:-.02em;font-weight:700;color:var(--muted); }
+@media(max-width:1100px){.enta-page .header{right:20px;left:calc(35.2083% + 20px);gap:8px}.enta-page .header-actions{gap:6px}.enta-page .header-actions .button,.enta-page .header-actions .language{font-size:12px;padding:8px}.case-breadcrumb{font-size:12px}.case-identity{gap:9px}.case-heading h2{font-size:50px}.case-section{margin-block:120px}.case-heading{margin-bottom:70px}.poster-two{margin-top:180px}}
+@media(max-width:700px){.enta-page .case-hero,.enta-page .case-hero .hero-canvas{height:auto;max-height:none;min-height:0}.enta-page .case-hero .hero-canvas{display:flex;flex-direction:column;padding-bottom:36px}.case-cover{position:relative;width:100%;height:110vw;max-height:620px}.case-cover>img:first-child{object-position:center 60%}.enta-page .header{position:relative;left:auto;right:auto;top:auto;margin:24px 20px 48px;gap:6px}.enta-page .header-actions{gap:4px}.enta-page .header-actions .button,.enta-page .header-actions .language{font-size:11px;padding:7px 6px;min-width:0}.case-breadcrumb{font-size:11px;gap:3px}.case-identity,.case-introduction,.case-tags,.case-meta{position:static;width:auto;margin-inline:20px}.case-identity{width:280px;margin-bottom:30px}.case-introduction{font-size:28px;margin-bottom:36px}.case-tags{flex-direction:row;flex-wrap:wrap;gap:8px;margin-bottom:28px}.case-tags span{font-size:12px;padding:9px}.case-meta{font-size:13px}.case-section{margin-block:80px}.case-heading{grid-template-columns:1fr;gap:24px;margin-bottom:40px}.case-heading h2{font-size:44px}.case-heading p{font-size:16px;padding:0}.case-stories{gap:8px}.case-outdoor{padding-block:50px}.outdoor-grid{gap:24px;grid-template-columns:1fr}.outdoor-label,.poster-one,.poster-two,.outdoor-copy{grid-area:auto;margin:0}.outdoor-label{order:-1;font-size:14px}.outdoor-copy{font-size:16px}.billboard-pair{gap:12px;margin-top:12px}.billboard-pair img:nth-child(2){margin-top:55px}.billboard-caption{font-size:14px;margin:20px 0 0}.case-conclusion{width:100%;margin-top:40px;font-size:28px}}
+
+.case-billboards>img { aspect-ratio:1200/717; object-fit:cover; }
+
+/* Keep the project cover beside its content until the right column is too narrow. */
+@media (min-width:560px) and (max-width:1100px) {
+ .enta-page .case-hero { height:auto; max-height:none; }
+ .enta-page .case-hero .hero-canvas { display:grid; grid-template-columns:35% minmax(0,1fr); grid-template-rows:auto auto auto auto auto; min-height:min(760px,100svh); height:auto; max-height:none; padding:0 24px 32px 0; column-gap:24px; }
+ .case-cover { position:absolute; width:35%; height:100%; max-height:none; }
+ .enta-page .header { grid-column:2; position:relative; inset:auto; margin:28px 0 60px; gap:8px; }
+ .case-identity,.case-introduction,.case-tags,.case-meta { grid-column:2; position:static; margin:0; width:auto; }
+ .case-identity { width:min(100%,320px); align-self:start; margin-bottom:30px; gap:12px; }
+ .case-introduction { font-size:clamp(23px,2.7vw,30px); max-width:480px; margin-bottom:38px; }
+ .case-tags { flex-direction:row; flex-wrap:wrap; align-content:start; gap:8px; margin-bottom:28px; }
+ .case-tags span { font-size:12px; padding:9px; }
+ .case-meta { font-size:13px; align-self:end; }
+ .case-breadcrumb { font-size:11px; }
+ .enta-page .header-actions { gap:3px; }
+ .enta-page .header-actions .button,.enta-page .header-actions .language { padding:7px 5px; font-size:11px; min-width:0; }
+ .enta-page .header .theme-toggle { width:24px; flex-basis:24px; padding:3px; }
+}
+@media (min-width:560px) and (max-width:660px) {
+ .enta-page .case-hero .hero-canvas { grid-template-columns:32% minmax(0,1fr); column-gap:16px; padding-right:16px; }
+ .case-cover { width:32%; }
+ .enta-page .header { gap:4px; }
+ .case-breadcrumb { gap:2px; font-size:10px; }
+}
+
+.brochure-artwork { position:relative; aspect-ratio:1200/1388; }
+.brochure-artwork img { position:absolute; object-fit:cover; border-radius:6px; }
+
+/* Match the main-page header inset; prevent grid rows stretching the header. */
+.enta-page .header { top:20px; }
+.case-muted { color:var(--muted); }
+.case-ink,.case-heading h2 .case-ink { color:var(--ink); }
+@media(min-width:560px) and (max-width:1100px) {
+ .enta-page .header { top:auto; align-self:start; margin-top:20px; }
+}
+@media(max-width:559px) {
+ .enta-page .header { top:auto; margin-top:26px; }
+}
+/* Word masks must inherit each Figma text segment's colour. */
+.case-heading h2 .text-reveal-word,
+.case-heading h2 .text-reveal-inner { color:inherit; }
+/* Preserve the original two-column project information on large tablets. */
+@media(min-width:900px) and (max-width:1100px) {
+ .enta-page .case-hero .hero-canvas { display:block;height:clamp(640px,min(100svh,75vw),1040px);padding:0; }
+ .enta-page .header { position:absolute;left:calc(35.2083% + 20px);right:24px;top:20px;margin:0; }
+ .enta-page .case-cover { width:35.2083%; }
+ .enta-page .case-identity { position:absolute;left:calc(35.2083% + 20px);top:29%;width:25%;margin:0;gap:8px; }
+ .enta-page .case-introduction { position:absolute;left:66%;top:29%;width:calc(34% - 24px);margin:0;font-size:clamp(21px,2.35vw,26px); }
+ .enta-page .case-tags { position:absolute;left:calc(35.2083% + 20px);bottom:32px;width:27%;margin:0; }
+ .enta-page .case-meta { position:absolute;left:66%;right:24px;bottom:32px;width:auto;margin:0;font-size:12px; }
+ .leaf-page .mpp-wordmark { width:62%; }
+ .leaf-page .leaf-wordmark { transform:scale(.78);transform-origin:left center;margin-right:-14px; }
+}
+@media(min-width:900px) {
+ .enta-page .case-tags { flex-direction:column;flex-wrap:nowrap;align-items:flex-start; }
+}

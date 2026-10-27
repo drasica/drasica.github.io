@@ -1,0 +1,113 @@
+/* Leaf Tower artwork follows the editorial layout of the supplied Figma frame. */
+.leaf-page .case-cover { overflow:hidden; }
+/* Hero flythrough: the clip carries the Leaf Tower logo in its centre */
+.leaf-page .case-cover>.leaf-cover-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
+.leaf-page .case-cover>img:first-child { position:absolute; width:auto;min-width:100%;height:104.41%;max-width:none;left:50%;top:-4.43%;transform:translateX(-50%);object-fit:cover; }
+.leaf-page .case-identity { width:292px; }
+.leaf-page .mpp-wordmark { width:183px; }
+.leaf-wordmark { width:62.843px;height:70.466px;flex-shrink:0; }
+.leaf-wordmark img { display:block; }
+.leaf-page .case-tags { width:240px;flex-direction:row;flex-wrap:wrap; }
+.leaf-page .case-tags span { white-space:nowrap; }
+.leaf-campaign { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start; }
+.campaign-column { display:flex;flex-direction:column;gap:20px; }
+.campaign-label { font-size:20px;line-height:1.2;color:var(--muted); }
+.leaf-warmup .campaign-column { aspect-ratio:387/688;justify-content:space-between; }
+.leaf-sales { margin-top:100px; }
+.leaf-sales>.campaign-label,.leaf-sales>.case-artwork { margin-top:28.95%; }
+.leaf-landing { background:var(--cream);padding:100px 0; }
+.leaf-landing-gallery { display:grid;grid-template-columns:621.58fr 362.59fr 168.35fr;gap:24px;align-items:start; }
+.leaf-brochure { position:relative;aspect-ratio:1200/1437; }
+.leaf-brochure>div { position:absolute;overflow:hidden;border-radius:8px; }
+.leaf-brochure img { display:block;max-width:none; }
+.brochure-cover { left:0;top:0;width:49.1667%;height:23.1037%;border:1px solid #c1cbd1; }
+.brochure-amenities { left:0;top:24.4955%;width:100%;height:23.4516%;border:1px solid #c1cbd1; }
+.brochure-benefits { left:0;top:49.339%;width:49.1667%;height:39.4572%; }
+.brochure-interior { left:50.8333%;top:49.339%;width:49.1667%;height:23.1037%;border:1px solid #c1cbd1; }
+.brochure-map { left:50.8333%;top:73.8344%;width:32.1667%;height:26.1656%; }
+.brochure-cover img,.brochure-amenities img,.brochure-interior img { width:100%;height:100%;object-fit:cover; }
+.brochure-benefits img { position:absolute;width:170.85%;height:100%;left:-66.08%;top:0; }
+.brochure-map img { width:173.53%;height:99.96%; }
+.leaf-result .case-heading { margin:0; }
+@media(min-width:560px) and (max-width:1100px) {
+ .leaf-page .case-tags { width:auto; }
+ .leaf-page .case-identity { max-width:100%; }
+ .leaf-page .case-breadcrumb { font-size:10px;gap:3px; }
+ .leaf-page .header { margin-bottom:44px; }
+}
+@media(max-width:700px) {
+ .leaf-campaign { gap:12px;grid-template-columns:1fr 1fr; }
+ .campaign-label { font-size:16px; }
+ .leaf-warmup .campaign-column { display:contents; }
+ .leaf-warmup .campaign-label,.leaf-sales>.campaign-label { grid-column:1/-1;margin:0 0 12px; }
+ .leaf-warmup>.case-artwork:last-child { grid-column:1; }
+ .leaf-sales { margin-top:50px; }
+ .leaf-sales>.case-artwork { margin:0; }
+ .campaign-column { gap:12px; }
+ .leaf-landing { padding:50px 0; }
+ .leaf-landing-gallery { gap:8px; }
+ .leaf-brochure { aspect-ratio:1200/1437; }
+}
+@media(max-width:559px) {
+ .leaf-page .case-identity { width:292px; }
+ .leaf-page .case-tags { width:auto; }
+ .leaf-page .case-breadcrumb { font-size:10px;gap:2px; }
+ .leaf-page .header .theme-toggle { width:22px;flex-basis:22px;padding:3px; }
+}
+.campaign-track { display:contents; }
+.leaf-warmup>.campaign-label { grid-column:1;grid-row:1; }
+.leaf-warmup .campaign-column { grid-column:1;grid-row:1;justify-content:flex-end; }
+.leaf-landing-gallery { display:block; }
+.landing-tabs { display:flex;gap:10px;margin-bottom:28px; }
+.landing-tabs button { border:0;border-radius:8px;background:var(--white,white);color:var(--ink);padding:12px 18px;font:inherit;cursor:pointer; }
+.landing-tabs button[aria-selected=true],.landing-tabs button:hover { background:var(--yellow);color:#162f42; }
+.landing-tabs button:focus-visible { outline:2px solid var(--ink);outline-offset:4px; }
+[data-theme=dark] .landing-tabs button:not([aria-selected=true]):not(:hover) { background:#161513; }
+.landing-preview { margin-inline:auto; }
+.landing-preview[hidden] { display:none; }
+.preview-desktop { max-width:947px; }
+.preview-tablet { max-width:646px; }
+.preview-mobile { max-width:244px; }
+@media(max-width:700px) {
+ .leaf-campaign { display:block; }
+ .leaf-campaign>.campaign-label { margin:0 0 24px; }
+ .leaf-campaign .campaign-track { display:flex;align-items:flex-start;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:20px;margin-inline:-20px;padding:0 20px 12px;overscroll-behavior-x:contain; }
+ .leaf-campaign .campaign-column { display:contents; }
+ .leaf-campaign .campaign-track img { flex:0 0 84%;width:84%;height:auto;margin:0;scroll-snap-align:start; }
+ .landing-tabs { gap:8px; }
+ .landing-tabs button { flex:1;padding:11px 8px;font-size:14px; }
+}
+@media(min-width:701px) { .leaf-sales .campaign-track>.case-artwork { margin-top:28.95%; } }
+/* Keep the rail affordance in the artwork, never in a scrollbar. */
+.campaign-track { scrollbar-width:none;-ms-overflow-style:none; }
+.campaign-track::-webkit-scrollbar { display:none;width:0;height:0; }
+@media(max-width:700px) {
+ .leaf-campaign .campaign-track { cursor:grab; }
+ .leaf-campaign .campaign-track.is-dragging { cursor:grabbing;scroll-snap-type:none;user-select:none; }
+ .campaign-track img { -webkit-user-drag:none;user-select:none; }
+ .leaf-brochure { display:flex;flex-direction:column;gap:16px;aspect-ratio:auto; }
+ .leaf-brochure>div { position:relative;inset:auto;width:100%;height:auto; }
+ .leaf-brochure .brochure-cover,.leaf-brochure .brochure-interior { aspect-ratio:590/332; }
+ .leaf-brochure .brochure-amenities { aspect-ratio:1200/337; }
+ .leaf-brochure .brochure-benefits { aspect-ratio:590/567; }
+ .leaf-brochure .brochure-map { aspect-ratio:386/376; }
+}
+.landing-preview { width:100%;max-width:none; }
+.landing-preview .case-artwork { display:block; }
+@media(min-width:900px) and (max-width:1100px) {
+ .enta-page.leaf-page .case-identity { width:25%; }
+ .enta-page.leaf-page .mpp-wordmark { width:62%; }
+ .enta-page.leaf-page .case-tags { width:27%; }
+}
+.landing-artwork { overflow:hidden;border-radius:8px;background:#fff; }   /* the screens have transparent margins: keep them white in the dark theme too */
+.landing-slice { position:relative;overflow:hidden; }
+.landing-slice img { display:block;position:absolute;top:0;max-width:none;height:100%;border-radius:0; }
+@media(min-width:900px) {
+ .leaf-page .case-tags { flex-direction:column;flex-wrap:nowrap; }
+}
+
+@media(min-width:701px) {
+ .landing-tabs { display:none; }
+ .leaf-landing-gallery { display:grid;grid-template-columns:621.58fr 362.59fr 168.35fr;gap:24px;align-items:start; }
+ .landing-preview { min-width:0; }
+}

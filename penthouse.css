@@ -1,0 +1,41 @@
+.penthouse-page .case-cover { overflow:hidden;background:#080705; }
+.penthouse-page .case-cover>img:first-child { object-position:center; }
+.penthouse-page .case-identity>img { width:100%;height:auto; }
+.penthouse-stories { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px; }
+.penthouse-stories img { border-radius:20px; }
+.penthouse-posters { display:grid;grid-template-columns:1fr 1fr;gap:20px; }
+.penthouse-billboard { display:block;margin-top:20px; }
+.penthouse-emails { position:relative;aspect-ratio:1200/2387.36;container-type:inline-size; }
+.penthouse-emails img { position:absolute; }
+.email-background { top:0;left:0;width:100%; }
+.penthouse-emails .email-one { top:4.748%;left:9.75%;width:38.167%;border:0;box-shadow:0 0 0 2cqw #fff;border-radius:0; }
+.penthouse-emails .email-two { top:24.226%;left:61.25%;width:27.833%;border:0;box-shadow:0 0 0 2cqw #fff;border-radius:0; }
+.penthouse-brochure { position:relative;aspect-ratio:1200/1094; }
+.penthouse-brochure>div { position:absolute;overflow:hidden;border-radius:8px; }
+.penthouse-brochure img { display:block;max-width:none;width:100%;height:100%;object-fit:cover; }
+.brochure-a { left:0;top:0;width:49.167%;height:30.256%; }
+.brochure-b { left:50.833%;top:0;width:30.583%;height:40.676%; }
+.brochure-c { left:0;top:32.084%;width:49.167%;height:30.256%; }
+.brochure-d { left:67.75%;top:42.505%;width:32.25%;height:38.117%; }
+.brochure-d img { position:absolute;width:193.44%;height:100.92%;left:-93.44%;top:-.96%; }
+.brochure-e { left:0;top:64.534%;width:49.167%;height:35.466%; }
+.brochure-e img { position:absolute;height:107.55%;top:-1.07%; }
+.campaign-track { scrollbar-width:none; }
+.campaign-track::-webkit-scrollbar { display:none;width:0;height:0; }
+@media(max-width:700px) {
+ .penthouse-stories { display:flex;overflow-x:auto;gap:12px;margin-inline:-20px;padding:0 20px;scroll-snap-type:x mandatory;scroll-padding-left:20px;cursor:grab; }
+ .penthouse-stories img { flex:0 0 84%;width:84%;height:auto;scroll-snap-align:start;user-select:none;-webkit-user-drag:none; }
+ .penthouse-stories.is-dragging { cursor:grabbing;scroll-snap-type:none; }
+ .penthouse-posters { grid-template-columns:1fr;gap:16px; }
+ .penthouse-brochure { display:flex;flex-direction:column;gap:16px;aspect-ratio:auto; }
+ .penthouse-brochure>div { position:relative;inset:auto;width:100%;height:auto; }
+ .brochure-a,.brochure-c { aspect-ratio:590/331; }
+ .brochure-b { aspect-ratio:367/445; }
+ .brochure-d { aspect-ratio:387/417; }
+ .brochure-e { aspect-ratio:590/388; }
+}
+.penthouse-billboard { aspect-ratio:1200/563;object-fit:cover; }
+@media(max-width:559px) {
+ .penthouse-page .case-cover { height:auto;max-height:none;aspect-ratio:507/855; }
+ .penthouse-page .case-cover>img:first-child { display:block;height:100%;object-fit:contain; }
+}

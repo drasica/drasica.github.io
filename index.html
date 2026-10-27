@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daria Kapustina — Digital Designer</title>
+<meta name="description" content="Daria Kapustina — multidisciplinary designer working across brand, marketing and AI-driven creative work."><meta property="og:type" content="website"><meta property="og:title" content="Daria Kapustina — Digital Designer"><meta property="og:description" content="Daria Kapustina — multidisciplinary designer working across brand, marketing and AI-driven creative work."><meta property="og:locale" content="en_US"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#fff9e7">
+<link rel="icon" href="assets/95c12.webp">
+<link rel="preload" href="assets/font-1.woff2?v=2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/font-2.woff2?v=2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="assets/fonts.css?v=2">
+<script src="theme.js"></script>
+<link rel="stylesheet" href="styles.css?v=motion-7">
+<style>
+/* Intro: on the first visit of a session a split-flap word board covers the page while the first screen loads */
+#site-intro { position: fixed; inset: 0; z-index: 1000; background: #162f42; color: #fff; display: grid; place-items: center; transition: transform .75s cubic-bezier(.76,0,.24,1); }
+#site-intro.is-leaving { transform: translateY(100%); }
+#site-intro .intro-name { position: absolute; left: 24px; top: 22px; font: 14px/1.4 'Inter Tight', Arial, sans-serif; opacity: .7; }
+#site-intro .intro-word { font: 700 clamp(44px, 10vw, 140px)/1 'Inter Tight', Arial, sans-serif; letter-spacing: -.04em; color: #ffc629; perspective: 600px; white-space: nowrap; }
+#site-intro .intro-word.is-last { color: #fff; }
+#site-intro .intro-word span { display: inline-block; transform-origin: 50% 60%; backface-visibility: hidden; }
+html.intro-skip #site-intro { display: none; }
+html.intro-on { overflow: hidden; }
+</style>
+<script src="config.js?v=2" defer>
+</script>
+<script src="typography.js?v=1" defer></script><script src="translations.js?v=typography-17" defer></script>
+<script src="app.js?v=typography-18" defer>
+</script>
+<script src="floating-stickers.js?v=4" defer></script>
+<script src="word-board.js?v=ru-9" defer></script>
+<script src="assets/vendor/lenis.min.js" defer></script><script src="smooth-scroll.js?v=1" defer></script><script src="navigation.js?v=circle-11" defer></script><script src="mobile-menu.js?v=7" defer></script>
+<script src="reveal.js?v=motion-1" defer></script>
+<link rel="stylesheet" href="footer.css?v=11"><link rel="stylesheet" href="mobile.css?v=16"><link rel="stylesheet" href="mobile-menu.css?v=5">
+<link rel="stylesheet" href="section-spacing.css?v=1">
+</head>
+<body>
+<div id="site-intro" aria-hidden="true"><span class="intro-name">Daria Kapustina</span><span class="intro-word"></span></div>
+<script>
+(() => {
+  // Shown once per session, skipped for reduced motion; it never holds the page longer than the first screen needs.
+  const root = document.documentElement, intro = document.getElementById('site-intro');
+  let seen = false; try { seen = sessionStorage.getItem('intro-seen') === '1'; sessionStorage.setItem('intro-seen', '1'); } catch {}
+  if (seen || matchMedia('(prefers-reduced-motion: reduce)').matches) { root.classList.add('intro-skip'); intro.remove(); return; }
+  root.classList.add('intro-on');
+  let lang = 'en'; try { lang = localStorage.getItem('portfolio-language') === 'ru' ? 'ru' : 'en'; } catch {}
+  const words = lang === 'ru' ? ['диджитал', 'бренд', 'маркетинг', 'граф', 'дизайн'] : ['digital', 'visual', 'brand', 'marketing', 'designer'];
+  if (lang === 'ru') intro.querySelector('.intro-name').textContent = 'Дарья Капустина';
+  const board = intro.querySelector('.intro-word'), STEP = 330, FLIP = 260, MIN = STEP * words.length + 120, MAX = 2600;
+  const t0 = performance.now();
+  window.__introDelay = MIN + 300;   // the floating stickers start their entrance as the board leaves
+  const show = (word, last) => {
+    board.classList.toggle('is-last', last);
+    board.innerHTML = [...word].map(c => `<span>${c}</span>`).join('');
+    // each letter flips over in turn, like a split-flap board
+    [...board.children].forEach((el, k) => el.animate([{ transform: 'rotateX(90deg)', opacity: 0 }, { transform: 'rotateX(0)', opacity: 1 }],
+      { duration: FLIP, delay: k * (FLIP / word.length) * .6, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'both' }));
+  };
+  words.forEach((w, i) => setTimeout(() => show(w, i === words.length - 1), i * STEP));
+  // leave when the first screen is ready (its video can play, or the page has loaded), not before the last word, not later than MAX
+  let ready = false;
+  const markReady = () => { ready = true; };
+  addEventListener('load', markReady, { once: true });
+  document.addEventListener('DOMContentLoaded', () => {
+    const v = document.querySelector('.hero-photo');
+    if (v && v.readyState >= 2) markReady(); else if (v) v.addEventListener('loadeddata', markReady, { once: true });
+  });
+  const leave = () => {
+    intro.classList.add('is-leaving');
+    root.classList.remove('intro-on');
+    intro.addEventListener('transitionend', () => intro.remove(), { once: true });
+    setTimeout(() => intro.remove(), 1200);
+  };
+  const check = () => { const t = performance.now() - t0; if ((ready && t >= MIN) || t >= MAX) leave(); else setTimeout(check, 60); };
+  setTimeout(check, MIN);
+})();
+</script>
+<a class="skip-link" href="#main" data-i18n="text1">Skip to content</a>
+<main id="main">
+<section class="hero" id="home" aria-label="Daria Kapustina, digital designer">
+<div class="hero-canvas">
+<video class="hero-photo" autoplay muted loop playsinline preload="auto" poster="assets/hero-studio-poster.webp?v=4" width="720" height="1280" aria-label="Daria working in her studio" data-i18n-alt="alt0"><source src="assets/hero-studio-720.mp4?v=4" type="video/mp4" media="(max-width: 600px)"><source src="assets/hero-studio.mp4?v=5" type="video/mp4"></video>
+<p class="hero-ai-note" data-i18n="aiNote">All videos on this page are AI-generated</p>
+<header class="header">
+<span class="name" data-i18n="text0">Daria Kapustina</span>
+<nav class="header-actions" aria-label="Header navigation">
+<button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false"><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 0 1 10.8 3.5 8.5 8.5 0 1 0 20.5 13.2Z"/></svg><img class="theme-sun" src="assets/header/sun.svg" width="20" height="20" alt=""></button>
+<button class="language" aria-label="Switch to Russian" type="button" aria-pressed="false">en</button>
+<a class="button" data-link="cv" aria-disabled="true" title="CV will be added soon">cv</a>
+<a class="button" href="#contact" data-i18n="text2">contact me</a>
+<button class="header-menu" type="button" aria-label="Open navigation" aria-controls="site-menu"><img src="assets/header/menu.svg" width="40" height="40" alt=""></button>
+</nav>
+<div class="menu-anchor" hidden>
+<a class="menu-logo" href="#home" aria-label="Home"><span aria-hidden="true"></span></a>
+<div class="menu-panel" id="site-menu" hidden>
+<nav aria-label="Main navigation">
+<a href="#home" data-i18n="text67">home</a>
+<a href="#experience" data-i18n="text68">experience</a>
+<a href="#projects" data-i18n="text69">all projects</a>
+<a href="#about" data-i18n="text70">about</a>
+<a data-link="cv" aria-disabled="true" title="CV will be added soon">cv</a>
+<a href="#contact" data-i18n="text2">contact me</a>
+</nav>
+</div>
+<button class="language" aria-label="Switch to Russian" type="button" aria-pressed="false">en</button>
+<button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false"><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.2A8.5 8.5 0 0 1 10.8 3.5 8.5 8.5 0 1 0 20.5 13.2Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button>
+<button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu"><span class="menu-icon" aria-hidden="true"></span></button>
+</div>
+</header>
+<div class="hero-orbit" aria-hidden="true">
+<div class="sticker sticker-one">
+<img src="assets/9ffae.webp" alt="">
+</div>
+<div class="sticker sticker-two">
+<img src="assets/cee51.webp" alt="">
+<img class="apple-body" src="assets/f7499.svg" alt="">
+<img class="apple-leaf" src="assets/2229d.svg" alt="">
+</div>
+<div class="sticker sticker-three">
+<img src="assets/2d1eb.webp" alt="">
+</div>
+<div class="sticker sticker-four">
+<img src="assets/9de6c.webp" alt="">
+</div>
+</div>
+<h1>
+<span class="ai-coded" data-i18n="text3">ai-coded</span>
+<span class="digital" aria-label="digital">digital</span>
+<span class="designer" data-i18n="text5">designer</span>
+</h1>
+<p class="location status">GMT+3<span data-i18n="text6">Sochi
+open to relocation</span>
+</p>
+</div>
+</section>
+<section class="intro wrap" id="intro" aria-labelledby="intro-title">
+<p class="eyebrow" data-i18n="text7">briefly about me</p>
+<h2 id="intro-title" data-i18n="text8">Hiii!
+I’m Daria!</h2>
+<div class="portraits">
+<div class="picture portrait portrait-left">
+<img src="assets/5f001.webp" alt="Daria, portrait" class="" style="" loading="lazy" decoding="async" data-i18n-alt="alt1">
+</div>
+<div class="picture portrait portrait-right">
+<img src="assets/09753.webp" alt="Daria, portrait" class="" style="" loading="lazy" decoding="async" data-i18n-alt="alt2">
+</div>
+</div>
+<div class="intro-copy">
+<p class="statement"><strong id="intro-lead" data-i18n="text9">Designer with 6+ years of experience in brand, marketing and digital creative work.</strong><span id="intro-rest" data-i18n="text10">My superpower: combining a hand-drawn visual language with a structured approach to building design systems.</span></p>
+<p class="eyebrow" data-i18n="text11">In other words, I’m a multidisciplinary designer.</p>
+</div>
+</section>
+
+<section class="projects" id="projects" aria-labelledby="projects-title">
+<div class="wrap">
+<div class="section-heading">
+<h2 id="projects-title">
+<span id="heading21" data-i18n="text21">selected</span><b id="heading22" data-i18n="text22"> projects</b>
+</h2>
+<p data-i18n="text23">Across brand,marketing and digital design.
+Designed for international teams, premium brands and digital-first communication.</p>
+</div>
+<div class="filters">
+<span class="eyebrow" data-i18n="text24">fast filters</span>
+<div class="filter-buttons" role="group" aria-label="Filter projects">
+<button type="button" data-filter="All" aria-pressed="true" data-i18n="text25">all</button>
+<button type="button" data-filter="Branding" aria-pressed="false" data-i18n="text26">branding</button>
+<button type="button" data-filter="Marketing Materials" aria-pressed="false" data-i18n="text27">marketing materials</button>
+<button type="button" data-filter="E-Mail" aria-pressed="false" data-i18n="text28">e-mail</button>
+<button type="button" data-filter="Web Design" aria-pressed="false" data-i18n="text29">web design</button>
+<button type="button" data-filter="AI" aria-pressed="false" data-i18n="text30">ai</button>
+</div>
+</div>
+<p class="sr-only" id="filter-status" role="status" aria-live="polite">
+</p>
+<div class="project-grid">
+<article class="project project-tanu" data-tags="Branding · AI">
+<a class="project-case-link" href="tanu.html" aria-label="TANU — view project"></a>
+<div class="picture project-image">
+<video class="project-video" muted loop playsinline preload="none" poster="assets/2be52.webp" aria-label="TANU" data-src="assets/tanu-preview.mp4"></video>
+</div>
+<div class="project-caption">
+<div>
+<h3>TANU</h3>
+<p class="eyebrow">2026</p>
+</div>
+<div>
+<p data-i18n="text31">A brand identity for a fashion label bringing Tatar cultural heritage into a contemporary urban aesthetic.</p>
+<p class="tags" data-i18n="text32">branding · ai</p>
+</div>
+</div>
+</article>
+<article class="project project-proriski" data-tags="Web Design · Branding · AI">
+<a class="project-case-link" href="proriski.html" aria-label="ProRiski — view project"></a>
+<div class="picture project-image">
+<video class="project-video" muted loop playsinline preload="none" poster="assets/proriski-preview-poster.webp" aria-label="ProRiski" data-src="assets/proriski-preview.mp4"></video>
+</div>
+<div class="project-caption">
+<div>
+<h3>ProRiski</h3>
+<p class="eyebrow">2025</p>
+</div>
+<div>
+<p data-i18n="text37">A new brand identity and platform interface for a company that helps traders develop their skills.</p>
+<p class="tags" data-i18n="text38">web design · branding · ai</p>
+</div>
+</div>
+</article>
+<article class="project project-enta" data-tags="Marketing Materials · E-Mail">
+<a class="project-case-link" href="enta.html" aria-label="MPP × ENTA — view project"></a>
+<div class="picture project-image">
+<img src="assets/56102.webp" alt="MPP x ENTA" class="" style="width:100%;height:216.83%;top:-38.11%" loading="lazy" decoding="async" data-i18n-alt="alt5">
+</div>
+<div class="project-caption">
+<div>
+<h3>MPP x ENTA</h3>
+<p class="eyebrow">2026</p>
+</div>
+<div>
+<p data-i18n="text35">A launch campaign for a luxury residential development in Ras Al Khaimah.</p>
+<p class="tags" data-i18n="text36">marketing materials · e-mail</p>
+</div>
+</div>
+</article>
+<article class="project project-aurus" data-tags="Web Design · AI">
+<a class="project-case-link" href="aurus.html" aria-label="Aurus — view project"></a>
+<div class="picture project-image">
+<video class="project-video" muted loop playsinline preload="none" poster="assets/64a11.webp" aria-label="Aurus" data-src="assets/aurus-preview.mp4?v=2"></video>
+</div>
+<div class="project-caption">
+<div>
+<h3>Aurus</h3>
+<p class="eyebrow">2026</p>
+</div>
+<div>
+<p data-i18n="text33">A visual interface concept for an electric fireplace.</p>
+<p class="tags" data-i18n="text34">web design · ai</p>
+</div>
+</div>
+</article>
+<article class="project project-leaf" data-tags="Web Design · Marketing Materials">
+<a class="project-case-link" href="leaf-tower.html" aria-label="Leaf Tower — view project"></a>
+<div class="picture project-image">
+<img src="assets/leaf-cover-preview.webp" alt="Leaf Tower" class="" style="" width="1600" height="822" loading="lazy" decoding="async" data-i18n-alt="alt7">
+</div>
+<div class="project-caption">
+<div>
+<h3>Leaf Tower</h3>
+<p class="eyebrow">2024</p>
+</div>
+<div>
+<p data-i18n="text39">A campaign for a residential development in Abu Dhabi, created in English, Russian and Arabic.</p>
+<p class="tags" data-i18n="text40">web design · marketing materials</p>
+</div>
+</div>
+</article>
+<article class="project project-penthouse" data-tags="E-Mail · Web Design · Marketing Materials">
+<a class="project-case-link" href="penthouse.html" aria-label="Penthouse (MPP)"></a>
+<div class="picture project-image">
+<img src="assets/08e1b.webp" alt="Penthouse (MPP)" class="" style="" loading="lazy" decoding="async" data-i18n-alt="alt8">
+</div>
+<div class="project-caption">
+<div>
+<h3>Penthouse<br>(MPP)</h3>
+<p class="eyebrow">2024</p>
+</div>
+<div>
+<p data-i18n="text41">A series of campaigns for ultra-luxury residential developments in Dubai.</p>
+<p class="tags" data-i18n="text42">e-mail · web design · marketing materials</p>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+<section class="experience wrap split" id="experience" aria-labelledby="experience-title">
+<h2 id="experience-title" data-i18n="text12">experience</h2>
+<div class="jobs">
+<article class="job">
+<h3>
+<span class="job-icon">
+<img class="mpp-logo-light" src="assets/9f373.svg" alt="" class="" style="" loading="lazy" decoding="async">
+<img class="mpp-logo-dark" src="assets/mpp-dark.svg" alt="">
+</span>MPP</h3>
+<div>
+<p data-i18n="text13">Digital Designer</p>
+<p class="eyebrow" data-i18n="text14">June 2023 – present</p>
+</div>
+</article>
+<article class="job">
+<h3>
+<span class="job-icon">
+<span class="skypro-logo">
+<img src="assets/ceb00.svg" alt="" class="" style="" loading="lazy" decoding="async">
+<img src="assets/34d3b.svg" alt="" class="" style="" loading="lazy" decoding="async">
+</span>
+</span>Skypro</h3>
+<div>
+<p data-i18n="text15">Graphic Design Mentor</p>
+<p class="eyebrow" data-i18n="text16">March 2023 – September 2025</p>
+</div>
+</article>
+<article class="job">
+<h3>
+<span class="job-icon">
+<span class="epiic-logo">
+<img src="assets/836a4.webp" alt="" class="" style="" loading="lazy" decoding="async">
+</span>
+</span>Epiic</h3>
+<div>
+<p data-i18n="text17">Design Reviewer</p>
+<p class="eyebrow" data-i18n="text18">May 2022 – December 2023</p>
+</div>
+</article>
+<article class="job">
+<h3>
+<span class="job-icon">
+<img src="assets/fc3b4.svg" alt="" class="" style="" loading="lazy" decoding="async">
+</span>Freelance</h3>
+<div>
+<p data-i18n="text19">Digital / Brand Designer</p>
+<p class="eyebrow" data-i18n="text20">March 2020 – present</p>
+</div>
+</article>
+</div>
+</section>
+<section class="about wrap" id="about" aria-labelledby="about-title">
+<div class="split about-heading">
+<div>
+<h2 id="about-title">
+<span id="heading43" data-i18n="text43">about</span><b id="heading44" data-i18n="text44"> me</b>
+</h2>
+
+</div>
+<div class="about-copy">
+<p data-i18n="text45">I have a Bachelor’s degree in Architecture, so drawing, composition, and visual thinking have always been a big part of how I work. I sketch, do illustration, take a lot of photos, and have a serious passion for shooting photos and video on my phone.</p>
+<p data-i18n="text46">Lately, I’ve been shooting more video and experimenting with AI production: generating visuals, editing, and blending real footage with AI-generated content. And when I feel like switching my brain from visuals to numbers, I read about crypto, investing and financial markets.</p>
+<div class="tool-stickers" aria-hidden="true">
+<div class="picture ">
+<img src="assets/b6a04.webp" alt="" class="" style="" loading="lazy" decoding="async">
+</div>
+<div class="picture ">
+<img src="assets/1554d.webp" alt="" class="" style="" loading="lazy" decoding="async">
+</div>
+<div class="picture ">
+<img src="assets/192a5.webp" alt="" class="" style="" loading="lazy" decoding="async">
+</div>
+<div class="picture ">
+<img src="assets/41b91.webp" alt="" class="" style="" loading="lazy" decoding="async">
+</div>
+<div class="picture ">
+<img src="assets/2ad3a.webp" alt="" class="" style="" loading="lazy" decoding="async">
+</div>
+<div class="picture ">
+<img src="assets/3fb11.webp" alt="" class="" style="" loading="lazy" decoding="async">
+</div>
+</div>
+</div>
+</div>
+<div class="gallery">
+<div class="gallery-opening">
+<div class="picture " style="aspect-ratio:386/388;height:auto;">
+<img src="assets/cceba.webp" alt="Watercolor sketchbook in the studio" class="sketchbook-source" loading="lazy" decoding="async" data-i18n-alt="alt9" width="386" height="388">
+</div>
+<div class="picture ">
+<img src="assets/3bfa6.webp" alt="Blue watercolor studies" class="" style="" loading="lazy" decoding="async" data-i18n-alt="alt10">
+</div>
+</div>
+<div class="gallery-feature">
+<div class="instagram-note">
+<p data-i18n="text47">more work
+here →</p>
+<a class="button" data-link="instagram" href="https://www.instagram.com/kadariart/" target="_blank" rel="noopener noreferrer">Instagram</a>
+</div>
+<figure>
+<div class="picture ">
+<img src="assets/watercolor-figma-v2.webp" alt="Watercolor landscape sketchbooks" class="" style="" loading="lazy" decoding="async" data-i18n-alt="alt11">
+</div>
+<figcaption>
+<h3 id="gallery-title0" data-i18n="text53">watercolor</h3>
+<p id="caption0" data-i18n="text48">A commercial postcard series: I painted the watercolours, scanned them and composed the designs for print. The postcards are still available in Ryazan.</p>
+</figcaption>
+</figure>
+</div>
+<div class="gallery-middle">
+<div>
+<figure>
+<div class="picture ">
+<img src="assets/8cb92.webp" alt="City watercolor sketches" class="" style="height:117.36%;top:-15.81%" loading="lazy" decoding="async" data-i18n-alt="alt12">
+</div>
+<figcaption>
+<h3 id="gallery-title1" data-i18n="text54">watercolor</h3>
+<p id="caption1" data-i18n="text49">Places and moments, captured in a handmade sketchbook.</p>
+</figcaption>
+</figure>
+<figure>
+<div class="picture " style="aspect-ratio:590/350;height:auto;">
+<img src="assets/mountain-figma-v3.webp" alt="Mountain landscape" class="figma-gallery-image" loading="lazy" decoding="async" data-i18n-alt="alt13" width="590" height="350">
+</div>
+<figcaption>
+<h3 id="gallery-title2" data-i18n="text55">photography</h3>
+<p id="caption2" data-i18n="text50">Looking for light, colour and quiet details.</p>
+</figcaption>
+</figure>
+</div>
+<div class="picture architecture" style="aspect-ratio:183/350;height:auto;">
+<img src="assets/architecture-figma-v3.webp" alt="Architectural detail" class="figma-gallery-image" loading="lazy" decoding="async" data-i18n-alt="alt14" width="183" height="350">
+</div>
+<div class="picture trees">
+<img src="assets/127a1.webp" alt="Sunlight through a grove of trees" class="" style="" loading="lazy" decoding="async" data-i18n-alt="alt15">
+</div>
+</div>
+<div class="gallery-last">
+<figure>
+<div class="picture ">
+<img src="assets/b3517.webp" alt="35mm film portrait in a garden" class="" style="" loading="lazy" decoding="async" data-i18n-alt="alt16">
+</div>
+<figcaption>
+<h3 id="gallery-title3" data-i18n="text56">35mm film</h3>
+<p id="caption3" data-i18n="text51">I love photography in all its forms.</p>
+</figcaption>
+</figure>
+<figure>
+<div class="picture ">
+<img src="assets/605c7.webp" alt="Light on a quiet city street" class="" style="" loading="lazy" decoding="async" data-i18n-alt="alt17">
+</div>
+<figcaption>
+<h3 id="gallery-title4" data-i18n="text57">home places</h3>
+<p id="caption4" data-i18n="text52">My favourite city at its most beautiful,
+through my phone’s lens.</p>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section class="more wrap" aria-labelledby="more-title">
+<div class="section-heading">
+<h2 id="more-title">
+<span id="heading58" data-i18n="text58">and just a bit</span><b id="heading59" data-i18n="text59"> more</b>
+</h2>
+<p data-i18n="text60">Team achievements and teaching.
+A creative community built around my art.</p>
+</div>
+<div class="more-grid">
+<a class="article article-maestra" href="https://maestra.io/blog/cases/metropolitan-group" target="_blank" rel="noopener noreferrer">
+<div class="picture ">
+<img src="assets/55080.webp" alt="maestra article" class="" style="" loading="lazy" decoding="async" data-i18n-alt="alt18">
+</div>
+<div class="article-caption">
+<h3 data-i18n="text62">maestra article</h3>
+<div>
+<span data-i18n="text61">What our team achieved together.</span>
+<img src="assets/3d9f0.svg" alt="" class="" style="" loading="lazy" decoding="async">
+</div>
+</div>
+</a>
+<a class="article article-skypro" href="https://sky.pro/course/ai/creator#giftpopup" target="_blank" rel="noopener noreferrer">
+<div class="picture ">
+<img src="assets/b63a6.webp" alt="education materials for skypro" class="" style="" loading="lazy" decoding="async" data-i18n-alt="alt19">
+</div>
+<div class="article-caption">
+<h3 data-i18n="text64">a course for Skypro</h3>
+<div>
+<span data-i18n="text63">Developed and filmed a course on creating videos with AI.</span>
+<img src="assets/3d9f0.svg" alt="" class="" style="" loading="lazy" decoding="async">
+</div>
+</div>
+</a>
+<a class="article article-blog" data-link="blog" href="https://www.instagram.com/kadariart/" target="_blank" rel="noopener noreferrer">
+<div class="picture ">
+<img src="assets/348ce.webp" alt="social media blog" class="" style="width:107.77%;height:170.97%;left:-.09%;top:-4.37%" loading="lazy" decoding="async" data-i18n-alt="alt20">
+</div>
+<div class="article-caption">
+<h3 data-i18n="text66">art &amp; community</h3>
+<div>
+<span data-i18n="text65">Built a successful art blog with a large, engaged community.</span>
+<img src="assets/3d9f0.svg" alt="" class="" style="" loading="lazy" decoding="async">
+</div>
+</div>
+</a>
+</div>
+</section>
+<footer id="contact">
+<div class="footer-inner wrap">
+<nav aria-label="Footer navigation">
+<a href="#home" data-i18n="text67">home</a>
+<a href="#experience" data-i18n="text68">experience</a>
+<a href="#projects" data-i18n="text69">all projects</a>
+<a href="#about" data-i18n="text70">about</a>
+</nav>
+<div class="contact-heading">
+<h2 data-i18n="text71">contact
+me</h2>
+</div>
+<p data-i18n="text72">Ready to create something great together?</p>
+<div class="contact-actions">
+<a class="button" data-link="email" href="mailto:drasica.k@gmail.com">E-Mail</a>
+<a class="button" data-link="telegram" href="https://t.me/kadariart" target="_blank" rel="noopener noreferrer">Telegram</a>
+</div>
+<p class="availability status" data-i18n="text73">open to projects
+from around the world</p>
+<img src="assets/95c12.webp" alt="" class="footer-avatar" style="" loading="lazy" decoding="async">
+<div class="social-links" role="group" aria-label="Social profiles">
+<a class="social-link social-linkedin" href="https://www.linkedin.com/in/daria-kapustina-a27a78249/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="social-vector" viewBox="140 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+<g id="Frame 2087331330">
+<path id="Vector" d="M30 19.0769C30.3077 19.5385 30.6154 20 30.7692 20.7692H25.8462C25.8462 20.6154 25.8462 20.3077 26 20C26.1538 19.6923 26.1538 19.5385 26.4615 19.2308C26.6154 18.9231 26.9231 18.7692 27.2308 18.6154C27.5385 18.4615 28 18.3077 28.4615 18.3077C29.0769 18.4615 29.6923 18.6154 30 19.0769ZM15.8462 18C16.1538 17.6923 16.4615 17.2308 16.4615 16.6154C16.4615 16.3077 16.4615 16 16.3077 15.6923C16.1538 15.5385 16 15.2308 15.8462 15.2308C15.6923 15.0769 15.3846 15.0769 15.0769 14.9231H11.0769V18.4615H14.4615C14.9231 18.4615 15.3846 18.3077 15.8462 18ZM14.6154 20.6154H11.0769V24.7692H14.6154C14.9231 24.7692 15.2308 24.7692 15.5385 24.6154C15.8462 24.6154 16.1538 24.4615 16.3077 24.3077C16.4615 24.1538 16.7692 24 16.9231 23.6923C17.0769 23.3846 17.0769 23.0769 17.0769 22.7692C17.0769 22 16.9231 21.3846 16.4615 21.0769C16 20.7692 15.3846 20.6154 14.6154 20.6154ZM40 7.53846V32.4615C40 36.6154 36.6154 40 32.4615 40H7.53846C3.38462 40 0 36.6154 0 32.4615V7.53846C0 3.38462 3.38462 0 7.53846 0H32.4615C36.6154 0 40 3.38462 40 7.53846ZM25.2308 14.7692H31.3846V13.2308H25.2308V14.7692ZM20.3077 23.0769C20.3077 22.1538 20.1538 21.3846 19.6923 20.6154C19.2308 20 18.6154 19.5385 17.6923 19.2308C18.3077 18.9231 18.9231 18.4615 19.2308 18C19.5385 17.5385 19.6923 16.9231 19.6923 16.1538C19.6923 15 19.5385 14.9231 19.3846 14.3077C19.0769 13.8462 18.7692 13.3846 18.4615 13.2308C18 12.9231 17.5385 12.7692 16.9231 12.6154C16.1538 12.3077 15.5385 12.3077 14.7692 12.3077H7.69231V27.3846H15.0769C15.6923 27.3846 16.4615 27.2308 17.0769 27.0769C17.6923 26.9231 18.3077 26.6154 18.7692 26.3077C19.2308 26 19.6923 25.5385 20 24.9231C20.1538 24.4615 20.3077 23.8462 20.3077 23.0769ZM25.8462 22.6154H33.6923C33.6923 21.6923 33.6923 20.9231 33.5385 20.1538C33.3846 19.3846 33.0769 18.6154 32.6154 18.1538C32.1538 17.5385 31.5385 17.0769 30.9231 16.7692C30.1538 16.4615 29.3846 16.1538 28.4615 16.1538C27.6923 16.1538 26.9231 16.3077 26.1538 16.6154C25.5385 16.9231 24.9231 17.3846 24.3077 17.8462C23.8462 18.3077 23.3846 18.9231 23.2308 19.6923C22.9231 20.4615 22.7692 21.2308 22.7692 22C22.7692 23.1538 22.9231 23.6923 23.2308 24.3077C23.5385 25.0769 23.8462 25.6923 24.3077 26.1538C24.7692 26.6154 25.3846 27.0769 26 27.3846C26.7692 27.6923 27.5385 27.8462 28.3077 27.8462C29.5385 27.8462 30.6154 27.5385 31.5385 26.9231C32.4615 26.3077 33.0769 25.3846 33.5385 24.1538H30.9231C30.7692 24.4615 30.6154 24.7692 30.1538 25.0769C29.6923 25.3846 29.2308 25.5385 28.6154 25.5385C27.8462 25.5385 27.0769 25.3846 26.6154 24.9231C26.1538 24.3077 25.8462 23.5385 25.8462 22.6154Z" fill="currentColor"/>
+<path id="Vector_2" fill-rule="evenodd" clip-rule="evenodd" d="M78.5721 0C76.2992 -1.67598e-07 74.1194 0.902681 72.5119 2.50956C70.9044 4.11643 70.0009 6.29594 70 8.56884V31.4279C70 33.7013 70.9031 35.8817 72.5107 37.4893C74.1183 39.0969 76.2987 40 78.5721 40H101.431C103.704 39.9991 105.884 39.0956 107.49 37.4881C109.097 35.8806 110 33.7008 110 31.4279V8.56884C109.999 6.29651 109.096 4.1175 107.489 2.51072C105.882 0.903939 103.703 0.000872463 101.431 0H78.5721ZM103.897 8.58201C103.897 9.23681 103.637 9.86479 103.174 10.3278C102.711 10.7908 102.083 11.0509 101.428 11.0509C100.773 11.0509 100.145 10.7908 99.6821 10.3278C99.2191 9.86479 98.9589 9.23681 98.9589 8.58201C98.9589 7.92721 99.2191 7.29923 99.6821 6.83621C100.145 6.3732 100.773 6.11308 101.428 6.11308C102.083 6.11308 102.711 6.3732 103.174 6.83621C103.637 7.29923 103.897 7.92721 103.897 8.58201ZM90.0049 13.1512C88.189 13.1512 86.4474 13.8726 85.1633 15.1567C83.8792 16.4408 83.1578 18.1824 83.1578 19.9984C83.1578 21.8143 83.8792 23.5559 85.1633 24.84C86.4474 26.1241 88.189 26.8455 90.0049 26.8455C91.8209 26.8455 93.5625 26.1241 94.8466 24.84C96.1307 23.5559 96.8521 21.8143 96.8521 19.9984C96.8521 18.1824 96.1307 16.4408 94.8466 15.1567C93.5625 13.8726 91.8209 13.1512 90.0049 13.1512ZM79.8626 19.9984C79.8626 17.3093 80.9308 14.7304 82.8322 12.8289C84.7337 10.9275 87.3126 9.85927 90.0016 9.85927C92.6907 9.85927 95.2696 10.9275 97.1711 12.8289C99.0725 14.7304 100.141 17.3093 100.141 19.9984C100.141 22.6874 99.0725 25.2663 97.1711 27.1678C95.2696 29.0692 92.6907 30.1374 90.0016 30.1374C87.3126 30.1374 84.7337 29.0692 82.8322 27.1678C80.9308 25.2663 79.8626 22.6874 79.8626 19.9984Z" fill="currentColor"/>
+<path id="Vector_3" d="M170.878 0H149.122C146.703 0 144.383 0.961071 142.672 2.67179C140.961 4.3825 140 6.70273 140 9.12205V30.8779C140 33.2973 140.961 35.6175 142.672 37.3282C144.383 39.0389 146.703 40 149.122 40H170.878C173.297 40 175.617 39.0389 177.328 37.3282C179.039 35.6175 180 33.2973 180 30.8779V9.12205C180 6.70273 179.039 4.3825 177.328 2.67179C175.617 0.961071 173.297 0 170.878 0ZM153.524 32.2913C153.531 32.4029 153.514 32.5147 153.476 32.6198C153.437 32.7248 153.378 32.821 153.301 32.9022C153.224 32.9835 153.132 33.0482 153.029 33.0923C152.926 33.1365 152.815 33.1592 152.704 33.159H149.052C148.832 33.1536 148.623 33.0621 148.469 32.904C148.316 32.746 148.231 32.5341 148.232 32.3138V17.1282C148.229 17.0186 148.248 16.9094 148.288 16.8073C148.328 16.7051 148.387 16.612 148.464 16.5334C148.54 16.4548 148.632 16.3923 148.733 16.3497C148.834 16.307 148.943 16.2851 149.052 16.2851H152.704C152.813 16.2851 152.922 16.307 153.023 16.3497C153.124 16.3923 153.215 16.4548 153.292 16.5334C153.368 16.612 153.428 16.7051 153.468 16.8073C153.508 16.9094 153.527 17.0186 153.524 17.1282V32.2913ZM150.81 13.0913C150.415 13.0883 150.024 13.0075 149.66 12.8535C149.296 12.6995 148.966 12.4753 148.688 12.1936C148.411 11.912 148.192 11.5785 148.043 11.2122C147.895 10.8458 147.82 10.4538 147.823 10.0585C147.826 9.66315 147.906 9.27229 148.06 8.9082C148.214 8.54412 148.439 8.21393 148.72 7.9365C149.002 7.65906 149.335 7.43982 149.702 7.29128C150.068 7.14273 150.46 7.06781 150.855 7.07077C151.64 7.09629 152.384 7.42743 152.928 7.99355C153.471 8.55967 153.773 9.31594 153.767 10.101C153.761 10.886 153.448 11.6377 152.896 12.1956C152.344 12.7535 151.595 13.0734 150.81 13.0872M172.999 32.2667C172.998 32.4739 172.917 32.6727 172.772 32.8212C172.627 32.9697 172.431 33.0562 172.224 33.0626H168.369C168.162 33.0562 167.965 32.9694 167.82 32.8205C167.675 32.6716 167.594 32.4722 167.594 32.2646V25.241C167.594 24.1928 167.914 20.681 164.812 20.681C162.394 20.681 161.916 23.1426 161.824 24.238V32.4246C161.824 32.6326 161.743 32.8324 161.598 32.9818C161.453 33.1311 161.256 33.2182 161.048 33.2246H157.309C157.097 33.2241 156.894 33.1395 156.744 32.9896C156.595 32.8396 156.511 32.6364 156.511 32.4246V17.0544C156.517 16.8465 156.604 16.6493 156.754 16.5045C156.903 16.3598 157.103 16.2789 157.311 16.279H161.048C161.256 16.2789 161.456 16.3598 161.605 16.5045C161.755 16.6493 161.842 16.8465 161.848 17.0544V18.3774C162.394 17.5787 163.147 16.9441 164.027 16.5422C164.907 16.1402 165.88 15.9861 166.841 16.0964C173.067 16.0964 173.044 21.9118 173.044 25.2185L172.999 32.2667Z" fill="currentColor"/>
+</g>
+</svg></a><a class="social-link social-instagram" href="https://www.instagram.com/drasica/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg class="social-vector" viewBox="70 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+<g id="Frame 2087331330">
+<path id="Vector" d="M30 19.0769C30.3077 19.5385 30.6154 20 30.7692 20.7692H25.8462C25.8462 20.6154 25.8462 20.3077 26 20C26.1538 19.6923 26.1538 19.5385 26.4615 19.2308C26.6154 18.9231 26.9231 18.7692 27.2308 18.6154C27.5385 18.4615 28 18.3077 28.4615 18.3077C29.0769 18.4615 29.6923 18.6154 30 19.0769ZM15.8462 18C16.1538 17.6923 16.4615 17.2308 16.4615 16.6154C16.4615 16.3077 16.4615 16 16.3077 15.6923C16.1538 15.5385 16 15.2308 15.8462 15.2308C15.6923 15.0769 15.3846 15.0769 15.0769 14.9231H11.0769V18.4615H14.4615C14.9231 18.4615 15.3846 18.3077 15.8462 18ZM14.6154 20.6154H11.0769V24.7692H14.6154C14.9231 24.7692 15.2308 24.7692 15.5385 24.6154C15.8462 24.6154 16.1538 24.4615 16.3077 24.3077C16.4615 24.1538 16.7692 24 16.9231 23.6923C17.0769 23.3846 17.0769 23.0769 17.0769 22.7692C17.0769 22 16.9231 21.3846 16.4615 21.0769C16 20.7692 15.3846 20.6154 14.6154 20.6154ZM40 7.53846V32.4615C40 36.6154 36.6154 40 32.4615 40H7.53846C3.38462 40 0 36.6154 0 32.4615V7.53846C0 3.38462 3.38462 0 7.53846 0H32.4615C36.6154 0 40 3.38462 40 7.53846ZM25.2308 14.7692H31.3846V13.2308H25.2308V14.7692ZM20.3077 23.0769C20.3077 22.1538 20.1538 21.3846 19.6923 20.6154C19.2308 20 18.6154 19.5385 17.6923 19.2308C18.3077 18.9231 18.9231 18.4615 19.2308 18C19.5385 17.5385 19.6923 16.9231 19.6923 16.1538C19.6923 15 19.5385 14.9231 19.3846 14.3077C19.0769 13.8462 18.7692 13.3846 18.4615 13.2308C18 12.9231 17.5385 12.7692 16.9231 12.6154C16.1538 12.3077 15.5385 12.3077 14.7692 12.3077H7.69231V27.3846H15.0769C15.6923 27.3846 16.4615 27.2308 17.0769 27.0769C17.6923 26.9231 18.3077 26.6154 18.7692 26.3077C19.2308 26 19.6923 25.5385 20 24.9231C20.1538 24.4615 20.3077 23.8462 20.3077 23.0769ZM25.8462 22.6154H33.6923C33.6923 21.6923 33.6923 20.9231 33.5385 20.1538C33.3846 19.3846 33.0769 18.6154 32.6154 18.1538C32.1538 17.5385 31.5385 17.0769 30.9231 16.7692C30.1538 16.4615 29.3846 16.1538 28.4615 16.1538C27.6923 16.1538 26.9231 16.3077 26.1538 16.6154C25.5385 16.9231 24.9231 17.3846 24.3077 17.8462C23.8462 18.3077 23.3846 18.9231 23.2308 19.6923C22.9231 20.4615 22.7692 21.2308 22.7692 22C22.7692 23.1538 22.9231 23.6923 23.2308 24.3077C23.5385 25.0769 23.8462 25.6923 24.3077 26.1538C24.7692 26.6154 25.3846 27.0769 26 27.3846C26.7692 27.6923 27.5385 27.8462 28.3077 27.8462C29.5385 27.8462 30.6154 27.5385 31.5385 26.9231C32.4615 26.3077 33.0769 25.3846 33.5385 24.1538H30.9231C30.7692 24.4615 30.6154 24.7692 30.1538 25.0769C29.6923 25.3846 29.2308 25.5385 28.6154 25.5385C27.8462 25.5385 27.0769 25.3846 26.6154 24.9231C26.1538 24.3077 25.8462 23.5385 25.8462 22.6154Z" fill="currentColor"/>
+<path id="Vector_2" fill-rule="evenodd" clip-rule="evenodd" d="M78.5721 0C76.2992 -1.67598e-07 74.1194 0.902681 72.5119 2.50956C70.9044 4.11643 70.0009 6.29594 70 8.56884V31.4279C70 33.7013 70.9031 35.8817 72.5107 37.4893C74.1183 39.0969 76.2987 40 78.5721 40H101.431C103.704 39.9991 105.884 39.0956 107.49 37.4881C109.097 35.8806 110 33.7008 110 31.4279V8.56884C109.999 6.29651 109.096 4.1175 107.489 2.51072C105.882 0.903939 103.703 0.000872463 101.431 0H78.5721ZM103.897 8.58201C103.897 9.23681 103.637 9.86479 103.174 10.3278C102.711 10.7908 102.083 11.0509 101.428 11.0509C100.773 11.0509 100.145 10.7908 99.6821 10.3278C99.2191 9.86479 98.9589 9.23681 98.9589 8.58201C98.9589 7.92721 99.2191 7.29923 99.6821 6.83621C100.145 6.3732 100.773 6.11308 101.428 6.11308C102.083 6.11308 102.711 6.3732 103.174 6.83621C103.637 7.29923 103.897 7.92721 103.897 8.58201ZM90.0049 13.1512C88.189 13.1512 86.4474 13.8726 85.1633 15.1567C83.8792 16.4408 83.1578 18.1824 83.1578 19.9984C83.1578 21.8143 83.8792 23.5559 85.1633 24.84C86.4474 26.1241 88.189 26.8455 90.0049 26.8455C91.8209 26.8455 93.5625 26.1241 94.8466 24.84C96.1307 23.5559 96.8521 21.8143 96.8521 19.9984C96.8521 18.1824 96.1307 16.4408 94.8466 15.1567C93.5625 13.8726 91.8209 13.1512 90.0049 13.1512ZM79.8626 19.9984C79.8626 17.3093 80.9308 14.7304 82.8322 12.8289C84.7337 10.9275 87.3126 9.85927 90.0016 9.85927C92.6907 9.85927 95.2696 10.9275 97.1711 12.8289C99.0725 14.7304 100.141 17.3093 100.141 19.9984C100.141 22.6874 99.0725 25.2663 97.1711 27.1678C95.2696 29.0692 92.6907 30.1374 90.0016 30.1374C87.3126 30.1374 84.7337 29.0692 82.8322 27.1678C80.9308 25.2663 79.8626 22.6874 79.8626 19.9984Z" fill="currentColor"/>
+<path id="Vector_3" d="M170.878 0H149.122C146.703 0 144.383 0.961071 142.672 2.67179C140.961 4.3825 140 6.70273 140 9.12205V30.8779C140 33.2973 140.961 35.6175 142.672 37.3282C144.383 39.0389 146.703 40 149.122 40H170.878C173.297 40 175.617 39.0389 177.328 37.3282C179.039 35.6175 180 33.2973 180 30.8779V9.12205C180 6.70273 179.039 4.3825 177.328 2.67179C175.617 0.961071 173.297 0 170.878 0ZM153.524 32.2913C153.531 32.4029 153.514 32.5147 153.476 32.6198C153.437 32.7248 153.378 32.821 153.301 32.9022C153.224 32.9835 153.132 33.0482 153.029 33.0923C152.926 33.1365 152.815 33.1592 152.704 33.159H149.052C148.832 33.1536 148.623 33.0621 148.469 32.904C148.316 32.746 148.231 32.5341 148.232 32.3138V17.1282C148.229 17.0186 148.248 16.9094 148.288 16.8073C148.328 16.7051 148.387 16.612 148.464 16.5334C148.54 16.4548 148.632 16.3923 148.733 16.3497C148.834 16.307 148.943 16.2851 149.052 16.2851H152.704C152.813 16.2851 152.922 16.307 153.023 16.3497C153.124 16.3923 153.215 16.4548 153.292 16.5334C153.368 16.612 153.428 16.7051 153.468 16.8073C153.508 16.9094 153.527 17.0186 153.524 17.1282V32.2913ZM150.81 13.0913C150.415 13.0883 150.024 13.0075 149.66 12.8535C149.296 12.6995 148.966 12.4753 148.688 12.1936C148.411 11.912 148.192 11.5785 148.043 11.2122C147.895 10.8458 147.82 10.4538 147.823 10.0585C147.826 9.66315 147.906 9.27229 148.06 8.9082C148.214 8.54412 148.439 8.21393 148.72 7.9365C149.002 7.65906 149.335 7.43982 149.702 7.29128C150.068 7.14273 150.46 7.06781 150.855 7.07077C151.64 7.09629 152.384 7.42743 152.928 7.99355C153.471 8.55967 153.773 9.31594 153.767 10.101C153.761 10.886 153.448 11.6377 152.896 12.1956C152.344 12.7535 151.595 13.0734 150.81 13.0872M172.999 32.2667C172.998 32.4739 172.917 32.6727 172.772 32.8212C172.627 32.9697 172.431 33.0562 172.224 33.0626H168.369C168.162 33.0562 167.965 32.9694 167.82 32.8205C167.675 32.6716 167.594 32.4722 167.594 32.2646V25.241C167.594 24.1928 167.914 20.681 164.812 20.681C162.394 20.681 161.916 23.1426 161.824 24.238V32.4246C161.824 32.6326 161.743 32.8324 161.598 32.9818C161.453 33.1311 161.256 33.2182 161.048 33.2246H157.309C157.097 33.2241 156.894 33.1395 156.744 32.9896C156.595 32.8396 156.511 32.6364 156.511 32.4246V17.0544C156.517 16.8465 156.604 16.6493 156.754 16.5045C156.903 16.3598 157.103 16.2789 157.311 16.279H161.048C161.256 16.2789 161.456 16.3598 161.605 16.5045C161.755 16.6493 161.842 16.8465 161.848 17.0544V18.3774C162.394 17.5787 163.147 16.9441 164.027 16.5422C164.907 16.1402 165.88 15.9861 166.841 16.0964C173.067 16.0964 173.044 21.9118 173.044 25.2185L172.999 32.2667Z" fill="currentColor"/>
+</g>
+</svg></a><a class="social-link social-threads" href="https://www.threads.com/@drasica" target="_blank" rel="noopener noreferrer" aria-label="Threads"><svg class="social-vector" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs><mask id="threads-cut"><rect width="40" height="40" fill="#fff"/><path transform="translate(9 9) scale(.9167)" fill="#000" d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/></mask></defs><rect width="40" height="40" rx="7.54" fill="currentColor" mask="url(#threads-cut)"/></svg></a>
+</div>
+
+</div>
+</footer>
+</main>
+</body>
+</html>

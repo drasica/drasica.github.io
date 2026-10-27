@@ -1,0 +1,114 @@
+/* Shared contact layout, based on Figma 4262:4848. */
+footer .footer-inner {
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px;
+  padding-block: 64px 50px; min-height: 0;
+}
+footer .footer-inner .contact-heading {
+  position: static; width: auto; min-height: 0; grid-column: 1/-1; grid-row: 1;
+}
+footer .footer-inner .contact-heading h2 {
+  font-size: clamp(74px, 8vw, 112px); line-height: .95; letter-spacing: -.02em;
+  text-align: left; width: auto; max-width: none; margin: 0; white-space: pre-line;
+}
+footer .footer-inner > [data-i18n="text72"] {
+  grid-column: 1; grid-row: 2; margin: 40px 0 0; max-width: 240px; font-size: 16px; line-height: 1.2;
+}
+footer .footer-inner .contact-actions {
+  position: static; grid-column: 2; grid-row: 2; margin-top: 40px;
+  display: flex; align-items: flex-start; gap: 16px; flex-wrap: nowrap;
+}
+footer .contact-actions .button { padding: 12px 24px; border-radius: 8px; font-size: 16px; line-height: 19px; }
+footer .footer-inner nav { position: static; grid-column: 1; grid-row: 3; gap: 24px; margin-top: 120px; font-size: 16px; line-height: 19px; }
+footer .footer-inner .availability {
+  position: relative; inset: auto; grid-column: 2; grid-row: 3; align-self: start;
+  margin: 120px 0 0; padding-left: 12px; max-width: 290px; white-space: normal; font-size: 16px; line-height: 19px;
+}
+footer .footer-inner .footer-avatar { position: static; grid-column: 1; grid-row: 4; width: 40px; height: 40px; margin-top: 118px; object-fit: fill; border-radius: 8px; }
+footer .footer-inner .social-links { position: static; grid-column: 2; grid-row: 4; margin-top: 118px; padding: 0; display: flex; gap: 30px; justify-content: flex-start; align-self: end; }
+footer .footer-inner .social-link { width: 40px; height: 40px; border-radius: 8px; }
+footer .social-threads { order: 0; } footer .social-instagram { order: 1; } footer .social-linkedin { order: 2; }
+footer .social-crop { width: 40px; height: 40px; mask: none; background: #fff9e7; border-radius: 8px; }
+footer .social-crop img { visibility: visible; width: 180px; height: 40px; max-width: none; top: 0; }
+footer .social-threads img { left: 0; } footer .social-instagram img { left: -70px; } footer .social-linkedin img { left: -140px; }
+footer .social-link:hover .social-crop { background: #fff9e7; opacity: .75; }
+@media (max-width: 700px) {
+  footer .footer-inner { width: calc(100% - 80px); column-gap: 0; grid-template-columns: 48.5714% 51.4286%; padding-top: 48px; }
+  footer .footer-inner .contact-heading h2 { font-size: clamp(48px, 17.3072vw, 100px); }
+  footer .footer-inner > [data-i18n="text72"] { max-width: 108px; font-size: 14px; line-height: 17px; margin-top: 47px; }
+  footer .footer-inner .contact-actions { grid-column: 1/-1; justify-self: end; margin-top: 51px; }
+  footer .footer-inner .availability { max-width: none; }
+  footer .footer-inner .social-links { gap: 30px; }
+}
+@media (max-width: 410px) {
+  footer .footer-inner { width: calc(100% - 40px); }
+  footer .footer-inner .contact-heading h2 { font-size: clamp(48px, 17.3072vw, 71px); }
+  footer .contact-actions .button { padding-inline: 15px; }
+  footer .footer-inner .contact-actions { gap: 8px; }
+  footer .footer-inner > [data-i18n="text72"] { max-width: 100px; }
+  footer .footer-inner .social-links { gap: clamp(10px, 5vw, 24px); }
+}
+footer .footer-inner { row-gap: 0; }
+@media (max-width: 700px) {
+  footer .footer-inner nav, footer .footer-inner .availability { margin-top: 138px; }
+}
+
+/* Desktop composition from Figma 4262:4825; the stacked layout is mobile only. */
+@media (min-width: 701px) {
+  footer .footer-inner { display: block; container-type: inline-size; width: min(1200px, calc(100% - 80px)); height: 528px; padding: 0; }
+  footer .footer-inner nav { position: absolute; left: 0; top: 101px; margin: 0; }
+  footer .footer-inner .contact-heading { position: absolute; left: 34%; top: 63px; width: 34%; }
+  footer .footer-inner .contact-heading h2 { font-size: 8.6667cqw; line-height: .96154; text-align: left; text-indent: -16.5833cqw; white-space: pre; }
+  footer .footer-inner > [data-i18n="text72"] { position: absolute; left: 17.4167%; top: calc(63px + 12.4167cqw); width: 123px; margin: 0; }
+  footer .footer-inner .contact-actions { position: absolute; left: 67.75%; top: calc(63px + 13.2883cqw); margin: 0; gap: 16px; }
+  footer .footer-inner .availability { position: absolute; left: 34%; top: 373px; width: 261px; margin: 0; }
+  footer .footer-inner .footer-avatar { position: absolute; left: 0; top: 367px; margin: 0; }
+  footer .footer-inner .social-links { position: absolute; right: 0; top: 390px; margin: 0; gap: 24px; }
+  footer .footer-inner .social-link, footer .social-crop { width: 24px; height: 24px; border-radius: 4px; }
+  footer .social-crop img { width: 120px; height: 24px; }
+  footer .social-instagram img { left: -48px; }
+  footer .social-linkedin img { left: -96px; }
+}
+@media (min-width: 701px) and (max-width: 1000px) {
+  footer .footer-inner { width: calc(100% - 48px); height: 460px; }
+  footer .footer-inner nav { font-size: 14px; gap: 20px; }
+  footer .footer-inner > [data-i18n="text72"] { font-size: 14px; width: 110px; }
+  footer .contact-actions .button { font-size: 14px; padding: 10px 14px; }
+  footer .footer-inner .contact-actions { gap: 8px; }
+  footer .footer-inner .availability { top: 325px; width: 220px; font-size: 14px; }
+  footer .footer-inner .footer-avatar { top: 319px; }
+  footer .footer-inner .social-links { top: 342px; }
+}
+
+/* One shared visual bottom edge for the desktop contact row. */
+@media (min-width: 701px) {
+  footer .footer-inner { --contact-edge: calc(63px + 16.6667cqw); --footer-copy-size: clamp(12px, 1.3333cqw, 16px); }
+  footer .footer-inner nav,
+  footer .footer-inner .contact-heading,
+  footer .footer-inner > [data-i18n="text72"],
+  footer .footer-inner .contact-actions { top: auto; bottom: calc(100% - var(--contact-edge)); }
+  footer .footer-inner nav { font-size: var(--footer-copy-size); line-height: 1.2; gap: 2cqw; transform: translateY(.26em); }
+  footer .footer-inner > [data-i18n="text72"] { font-size: var(--footer-copy-size); line-height: 1.2; width: min(123px, 14cqw); transform: translateY(.26em); }
+  footer .footer-inner .contact-heading h2 { transform: translateY(.11em); }
+  footer .footer-inner .contact-actions { gap: 1.3333cqw; }
+  footer .contact-actions .button { font-size: var(--footer-copy-size); line-height: 1.2; padding: 1cqw 2cqw; }
+}
+
+/* Vector marks inherit the theme foreground; their cutouts reveal the footer. */
+footer .social-vector{display:block;width:100%;height:100%;overflow:hidden;color:var(--ink)}
+footer .social-link:hover .social-vector{opacity:.75}
+
+
+/* Phones: proportions from the mobile mockup (390 wide): heading across the width, the line and both buttons
+   on one row, then the nav beside the availability note, then the avatar and the social marks. */
+@media (max-width: 700px) {
+  footer .footer-inner { width: calc(100% - 76px); grid-template-columns: 1fr 1fr; column-gap: 0; row-gap: 0; padding-block: 67px 45px; }
+  footer .footer-inner .contact-heading h2 { font-size: clamp(44px, 14.6vw, 76px); line-height: .95; letter-spacing: -.02em; }
+  footer .footer-inner > [data-i18n="text72"] { grid-column: 1; grid-row: 2; align-self: center; margin: 44px 0 0; max-width: 110px; font-size: 13px; line-height: 1.2; }
+  footer .footer-inner .contact-actions { grid-column: 1/-1; grid-row: 2; justify-self: end; align-self: center; margin: 44px 0 0; gap: 15px; }
+  footer .footer-inner .contact-actions .button { height: 38px; padding: 0 18px; font-size: 14px; line-height: 1; border-radius: 8px; }
+  footer .footer-inner nav { display: flex; flex-direction: column; grid-column: 1; grid-row: 3; margin: 128px 0 0; gap: 22px; font-size: 14px; line-height: 16px; }
+  footer .footer-inner .availability { grid-column: 2; grid-row: 3; margin: 128px 0 0; max-width: none; font-size: 13px; line-height: 1.2; }
+  footer .footer-inner .footer-avatar { grid-column: 1; grid-row: 4; align-self: end; width: 40px; height: 40px; margin: 104px 0 0; border-radius: 8px; }
+  footer .footer-inner .social-links { grid-column: 2; grid-row: 4; justify-self: end; align-self: end; margin: 104px 0 0; gap: 30px; }
+  footer .footer-inner .social-link, footer .footer-inner .social-link .social-vector { width: 40px; height: 40px; min-width: 40px; min-height: 40px; border-radius: 8px; }
+}

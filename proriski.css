@@ -1,0 +1,52 @@
+.proriski-page .case-identity>img { width:130px;height:auto; }
+.proriski-page .case-cover { overflow:hidden;background:#0b1f1a; }
+.pro-cover-video { display:block;width:100%;height:100%;object-fit:cover;object-position:50% 35%; }
+.logo-comparison { display:grid;grid-template-columns:387fr 183fr 590fr;gap:20px;align-items:center; }
+.logo-comparison figure { margin:0; }
+.logo-comparison figcaption,.pro-label { font-size:16px;color:var(--muted);margin-bottom:14px; }
+.old-logo { aspect-ratio:387/300;background:#f7f7f7;border-radius:14px;display:grid;place-items:center; }
+.old-logo img { width:52%;height:auto;border-radius:24px; }
+.logo-comparison .comparison-arrow { width:50%;height:auto;justify-self:center; }
+.pro-explanation { width:calc(50% - 10px);margin:60px 0 0 auto;font-size:20px;line-height:1.2;color:var(--muted); }
+.pro-posters { position:relative;aspect-ratio:1200/783;margin-top:90px; }
+.pro-posters img { position:absolute; }
+.pro-posters .pro-poster-one { left:0;top:34.48%;width:32.25%; }
+.pro-posters .pro-poster-two { left:33.917%;top:34.48%;width:15.25%; }
+.pro-posters .pro-poster-three { right:0;top:0;width:32.25%; }
+.pro-heading { position:relative; }
+.pro-before { display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:100px; }
+.pro-before-image { aspect-ratio:590/295;overflow:hidden;border-radius:8px;border:1px solid #c1cbd1; }
+.pro-before-image img { width:101.11%;max-width:none;height:110.05%;object-fit:fill;margin-left:-.54%; }
+.pro-dashboard { aspect-ratio:1200/648;overflow:hidden;border:1px solid #c1cbd1; }
+.pro-dashboard img { width:99.36%;height:100%;object-fit:fill; }
+.pro-landing { aspect-ratio:1200/675;overflow:hidden;margin-top:100px; }
+.pro-landing img { width:100%;height:106.94%;object-fit:fill; }
+.pro-mobile { display:grid;grid-template-columns:repeat(3,355fr);gap:6.25%;align-items:start; }
+.pro-mobile img { aspect-ratio:355/788;object-fit:cover;border-radius:24px; }
+.pro-mobile img:last-child { object-fit:contain; }
+/* Prototype recordings: 393×893 phone fitted into the 355×788 frame, corners clipped to the phone radius (48px). */
+.pro-mobile .pro-phone-video { display:block;width:100%;height:auto;aspect-ratio:355/788;object-fit:contain;border-radius:0;background:transparent;clip-path:inset(0 1.155% round 11.93% / 5.375%); }
+.campaign-track { scrollbar-width:none; }
+.campaign-track::-webkit-scrollbar { display:none;width:0;height:0; }
+@media(max-width:700px) {
+ .logo-comparison { grid-template-columns:1fr 40px 1.52fr;gap:10px; }
+ .logo-comparison .comparison-arrow { width:100%; }
+ .logo-comparison figcaption,.pro-label { font-size:13px; }
+ .pro-explanation { width:100%;font-size:16px;margin-top:30px; }
+ .pro-posters { margin-top:50px; }
+ .pro-before { grid-template-columns:1fr;gap:10px;margin-bottom:40px; }
+ .pro-landing { margin-top:40px; }
+ .pro-mobile { display:flex;overflow-x:auto;gap:16px;margin-inline:-20px;padding:0 20px;scroll-snap-type:x mandatory;scroll-padding-left:20px;cursor:grab; }
+ .pro-mobile img,.pro-mobile .pro-phone-video { width:76%;flex:0 0 76%;height:auto;scroll-snap-align:start;user-select:none;-webkit-user-drag:none; }
+ .pro-mobile.is-dragging { cursor:grabbing;scroll-snap-type:none; }
+ }
+.old-logo img { aspect-ratio:201/102;object-fit:cover; }
+.pro-film { display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000;object-fit:cover; }
+.pro-film-wrap { position:relative; }
+.pro-film-sound { position:absolute;right:16px;bottom:16px;width:44px;height:44px;border:0;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.45);color:#fff;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .2s; }
+.pro-film-sound:hover { background:rgba(0,0,0,.65); }
+.pro-film-sound:focus-visible { outline:2px solid #fff;outline-offset:2px; }
+.pro-film-sound svg { width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round; }
+.pro-film-sound .icon-sound,.pro-film-sound[aria-pressed="true"] .icon-muted { display:none; }
+.pro-film-sound[aria-pressed="true"] .icon-sound { display:block; }
+@media(max-width:700px) { .pro-film-sound { right:10px;bottom:10px;width:38px;height:38px; } }

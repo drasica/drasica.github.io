@@ -1,0 +1,20 @@
+/* Equal content spacing: two half-gaps meet at each section boundary. */
+main { --section-half-gap: 100px; }
+main > .intro,
+main > .projects,
+main > .experience,
+main > .about,
+main > .more {
+  margin-block: 0;
+  padding-block: var(--section-half-gap);
+}
+.experience .job:last-child { padding-bottom: 0; }
+/* The footer's desktop composition already starts 63px below its edge. */
+main > footer { padding-top: calc(var(--section-half-gap) - 63px); }
+@media (max-width: 1000px) {
+  main { --section-half-gap: 80px; }
+}
+@media (max-width: 700px) {
+  main { --section-half-gap: 60px; }
+  main > footer { padding-top: 12px; }
+}
