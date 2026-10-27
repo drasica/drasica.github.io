@@ -23,7 +23,7 @@
     <div class="mm-col"><p class="mm-label" data-k="projects"></p>
       ${PROJECTS.map(([url, name]) => link(url, name, url === page ? ' aria-current="page"' : '')).join('')}</div>
     <div class="mm-col"><p class="mm-label" data-k="contact"></p>
-      ${link(href('.contact-actions a[href^="mailto"]'), 'E‑Mail')}${link(href('.contact-actions a[href*="t.me"]'), 'Telegram', ext)}<span class="mm-link is-off">cv <small data-k="soon"></small></span></div>
+      ${link(href('.contact-actions a[href^="mailto"]'), 'E‑Mail')}${link(href('.contact-actions a[href*="t.me"]'), 'Telegram', ext)}<a class="mm-link" data-link="cv">cv <small data-k="soon"></small></a></div>
     <div class="mm-col"><p class="mm-label" data-k="social"></p>
       ${link(href('.social-instagram'), 'Instagram', ext)}${link(href('.social-threads'), 'Threads', ext)}${link(href('.social-linkedin'), 'LinkedIn', ext)}</div>`;
   anchor.append(sheet);

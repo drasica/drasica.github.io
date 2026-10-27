@@ -28,8 +28,8 @@ window.portfolioTranslations = {
     "ru": "дизайн"
   },
   "text6": {
-    "en": "Sochi\nopen to relocation",
-    "ru": "Сочи,\nготова к переезду"
+    "en": "Sochi\nremote or relocation",
+    "ru": "Сочи,\nудалёнка или релокация"
   },
   "text7": {
     "en": "briefly about me",

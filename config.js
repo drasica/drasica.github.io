@@ -19,3 +19,31 @@ window.portfolioStartLanguage = () => {
     'Asia/Vladivostok', 'Asia/Ust-Nera', 'Asia/Magadan', 'Asia/Sakhalin', 'Asia/Srednekolymsk', 'Asia/Kamchatka', 'Asia/Anadyr'];
   try { return russianZones.includes(Intl.DateTimeFormat().resolvedOptions().timeZone) ? 'ru' : 'en'; } catch { return 'en'; }
 };
+
+// CV per language; a language without a file keeps the button marked "soon".
+window.portfolioCv = { ru: 'assets/cv/Daria-Kapustina-CV-ru.pdf', en: null };
+(() => {
+  const apply = () => {
+    const ru = document.documentElement.lang === 'ru';
+    const file = window.portfolioCv[ru ? 'ru' : 'en'];
+    document.querySelectorAll('[data-link="cv"]').forEach(link => {
+      const soon = link.querySelector('small');
+      if (file) {
+        link.href = file;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.removeAttribute('aria-disabled');
+        link.removeAttribute('title');
+      } else {
+        link.removeAttribute('href');
+        link.removeAttribute('target');
+        link.setAttribute('aria-disabled', 'true');
+        link.title = ru ? 'Резюме скоро появится' : 'CV will be added soon';
+      }
+      link.classList.toggle('is-off', !file);
+      if (soon) soon.hidden = !!file;
+    });
+  };
+  document.addEventListener('DOMContentLoaded', apply);
+  new MutationObserver(apply).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+})();
