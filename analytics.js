@@ -1,8 +1,19 @@
 // Visit statistics (Umami): how far people get on each page and what they click.
 // The tracker itself only counts on drasica.github.io (data-domains), so local previews stay out of the numbers.
 (() => {
+  // Clarity (visit recordings and heatmaps), live site only.
+  if (location.hostname === 'drasica.github.io') {
+    window.clarity = window.clarity || function () { (clarity.q = clarity.q || []).push(arguments); };
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.clarity.ms/tag/z4rjvzpiab';
+    document.head.append(tag);
+  }
+
   const queue = [];
   const send = (name, data) => {
+    // the same events mark Clarity recordings, so they can be filtered by them
+    window.clarity?.('event', name);
     if (window.umami?.track) umami.track(name, data);
     else queue.push([name, data]);
   };
