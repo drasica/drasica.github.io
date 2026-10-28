@@ -28,7 +28,7 @@ window.portfolioTranslations = {
     "ru": "дизайн"
   },
   "text6": {
-    "en": "Sochi\nremote or relocation",
+    "en": "Remote\nOpen to relocation",
     "ru": "Сочи,\nудалёнка или релокация"
   },
   "text7": {
@@ -322,8 +322,8 @@ window.portfolioAltTranslations = {
     "ru": "Aurus"
   },
   "alt5": {
-    "en": "MPP x ENTA",
-    "ru": "MPP x ENTA"
+    "en": "MPP × ENTA",
+    "ru": "MPP × ENTA"
   },
   "alt6": {
     "en": "ProRiski",

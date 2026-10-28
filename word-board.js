@@ -34,6 +34,15 @@
     }
     const middleHeight = word.getBoundingClientRect().height;
     word.style.top = `${(first.getBoundingClientRect().bottom+last.getBoundingClientRect().top-middleHeight)/2-bounds.top}px`;
+    // The location note wraps before it can run into the last line of the heading.
+    const place = hero.querySelector('.location');
+    if (place) {
+      place.style.maxWidth = '';
+      const box = place.getBoundingClientRect(), placeStyle = getComputedStyle(place);
+      const room = last.getBoundingClientRect().left - box.left - 16;
+      const inset = placeStyle.boxSizing === 'border-box' ? 0 : parseFloat(placeStyle.paddingLeft) + parseFloat(placeStyle.paddingRight);
+      if (room > 0 && room < box.width) place.style.maxWidth = `${room - inset}px`;
+    }
     // The last line sits on the baseline of the location note's last line.
     const baseline = el => {
       const probe = document.createElement('span');

@@ -21,7 +21,7 @@ window.portfolioStartLanguage = () => {
 };
 
 // CV per language; a language without a file keeps the button marked "soon".
-window.portfolioCv = { ru: 'assets/cv/Daria-Kapustina-CV-ru.pdf?v=2', en: null };
+window.portfolioCv = { ru: 'assets/cv/Daria-Kapustina-CV-ru.pdf?v=3', en: 'assets/cv/Daria-Kapustina-CV-en.pdf?v=3' };
 (() => {
   const apply = () => {
     const ru = document.documentElement.lang === 'ru';

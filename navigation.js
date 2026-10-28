@@ -92,13 +92,5 @@
   }));
   new MutationObserver(() => headerMenus.forEach(b => b.setAttribute('aria-label', document.documentElement.lang === 'ru' ? 'Открыть навигацию' : 'Open navigation')))
     .observe(document.documentElement, {attributes: true, attributeFilter: ['lang']});
-  // the folded pill offers "contact me" in place of the language switch, which comes back once it opens
-  const contact = document.createElement('a');
-  contact.className = 'menu-contact';
-  contact.href = '#contact';
-  anchor.querySelector('.menu-logo').after(contact);
-  const contactLabel = () => { contact.textContent = window.portfolioTranslations?.text2?.[document.documentElement.lang === 'ru' ? 'ru' : 'en'] || 'contact me'; };
-  new MutationObserver(contactLabel).observe(document.documentElement, {attributes: true, attributeFilter: ['lang']});
-  contactLabel();
   label(); position();
 })();

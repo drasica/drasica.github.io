@@ -667,12 +667,6 @@ html.lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-smooth iframe { pointer-events: none; }
 
-/* Folded pill: logo, "contact me" and the burger; the language switch and theme return once it opens. */
-.menu-contact { display: none; }
-html body .hero .header .menu-anchor:not(.is-open) { width: 232px; }
-html body .hero .header .menu-anchor:not(.is-open) .language { display: none; }
-html body .hero .header .menu-anchor:not(.is-open) .menu-contact { display: grid; place-items: center; flex: 1 1 auto; min-width: 0; height: 44px; padding: 0 12px; border-radius: 999px; font-size: 14px; white-space: nowrap; color: white; text-decoration: none; }
-html body .hero .header .menu-anchor .menu-contact:hover { background: #ffffff15; }
 /* Same quiet hover as the links, on a true circle. */
 html body .hero .header .menu-anchor .theme-toggle { flex: 0 0 40px; width: 40px; height: 40px; padding: 10px; border: 0; border-radius: 50%; }
 html body .hero .header .menu-anchor .theme-toggle:hover { background: #ffffff15; }
@@ -682,7 +676,7 @@ html body .hero .header .menu-anchor .theme-toggle:hover { background: #ffffff15
 .menu-toggle .menu-icon::after { width: 11px; transform: translateY(2.8px); }
 .menu-toggle[aria-expanded="true"] .menu-icon::before { width: 18px; transform: rotate(45deg); }
 .menu-toggle[aria-expanded="true"] .menu-icon::after { width: 18px; transform: rotate(-45deg); }
-html body .hero .header .menu-anchor .language { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; }
+html body .hero .header .menu-anchor .language { flex: 0 0 40px; width: 40px; min-width: 40px; height: 40px; border-radius: 50%; }
 html body .hero .header .menu-anchor .language:hover { background: #ffffff15; }
 
 /* Wide screens: the content stays within 1600px, but the first-screen video or cover runs to the window's left edge and crops to fit. */
@@ -695,3 +689,7 @@ html body .hero .header .menu-anchor .language:hover { background: #ffffff15; }
   /* the wider frame trims the cover's top and bottom; keep the penthouse.ae mark at the top intact */
   .penthouse-page .hero-canvas > .case-cover > img:first-child { object-position: center top; }
 }
+
+/* Headings break into even lines; reading text avoids a lone last word. */
+main h2, main h3, footer h2 { text-wrap: balance; }
+main p, main li { text-wrap: pretty; }
