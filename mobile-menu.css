@@ -12,5 +12,12 @@
   .mm-link small { font-size: 10px; font-weight: 500; }
   html[data-theme="dark"] body .hero .header .menu-anchor .mm-sheet { background: #201f1c; color: #f5efe5; box-shadow: 0 12px 40px rgba(0, 0, 0, .4); }
 }
+.header-contact { display: none; }
+/* wherever the header folds into icons (tablets and phones) it ends with the envelope */
+@media (max-width: 1024px) {
+  html body .header .header-menu { display: none; }
+  html body .header .header-contact { order: 4; display: grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; border-radius: 8.889px; background: #fff; color: var(--ink); }
+  html[data-theme="dark"] body .header .header-contact { background: #161513; color: #f5efe5; }
+}
 @keyframes mm-in { from { opacity: 0; transform: translateX(-50%) translateY(10px) scale(.96); } }
 @media (prefers-reduced-motion: reduce) { html body .hero .header .menu-anchor.is-open .mm-sheet { animation: none; } }

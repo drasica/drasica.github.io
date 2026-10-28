@@ -95,3 +95,23 @@
 @media(min-width:900px) {
  .enta-page .case-tags { flex-direction:column;flex-wrap:nowrap;align-items:flex-start; }
 }
+
+/* Phones: the outdoor caption sits in the empty corner under the desert billboard, level with the bottom of the street poster. */
+@media(max-width:700px) {
+ .case-billboards { display:grid; grid-template-columns:1fr 1fr; column-gap:12px; }
+ .case-billboards>img { grid-column:1 / -1; }
+ .case-billboards .billboard-pair { display:contents; }
+ .case-billboards .billboard-pair img { grid-row:2; margin-top:12px; }
+ .case-billboards .billboard-pair img:nth-child(2) { grid-column:2; grid-row:2 / span 2; margin-top:67px; }
+ .case-billboards .billboard-caption { grid-column:1; grid-row:3; align-self:end; margin:0; line-height:1.3; }
+}
+/* Phones: the brochure pages follow one another full width, the two narrow framed pages share a row. */
+@media(max-width:700px) {
+ .brochure-artwork { display:grid; grid-template-columns:1fr 1fr; gap:16px; aspect-ratio:auto; }
+ .brochure-artwork img { position:static; grid-column:1 / -1; width:100% !important; height:auto !important; }
+ .brochure-artwork img[src*="brochure-portrait"], .brochure-artwork img[src*="brochure-quote"] { grid-column:auto; }
+ .brochure-artwork img[src*="brochure-interior"] { order:1; }
+ .brochure-artwork img[src*="brochure-back"] { order:2; }
+ .brochure-artwork img[src*="brochure-map"] { order:3; }
+ .brochure-artwork img[src*="brochure-spread"] { order:4; }
+}

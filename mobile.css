@@ -90,7 +90,7 @@ footer .footer-inner nav a { padding-block: 12px; margin-block: -12px; }
 
 /* ---------- Header (Figma: Portfolio — Header, Variant 4) ----------
    Square white knobs 40×40, radius 8.889px, Inter 14.44px. Desktop: sun · EN · cv · contact me.
-   Phones and tablets: name (or breadcrumb) on the left, then sun · EN · CV · menu. */
+   Phones and tablets: name (or breadcrumb) on the left, then sun · EN · CV · envelope (mobile-menu.css). */
 html body .header .header-actions .theme-toggle { flex: 0 0 40px; width: 40px; height: 40px; min-width: 40px; padding: 10px; border: 0; border-radius: 8.889px; background: #fff; }
 html body .header .header-actions .theme-toggle .theme-sun { grid-area: 1/1; width: 20px; height: 20px; }
 html[data-theme="dark"] body .header .header-actions .theme-toggle { background: #161513; color: #f5efe5; }

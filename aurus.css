@@ -46,6 +46,8 @@
 .aurus-page .case-section,.aurus-tinted{padding-block:50px}
 .aurus-page .case-hero+.case-section{padding-top:80px}
 .aurus-concepts,.aurus-screen-grid,.aurus-pair{gap:8px}
+.aurus-concepts{grid-template-columns:1fr;gap:16px}
+.aurus-concepts>.aurus-art{grid-column:1;grid-row:auto}
 .aurus-labelled{grid-template-columns:1fr;gap:14px}
 .aurus-labelled+.aurus-labelled{margin-top:30px}
 .aurus-decision{font-size:16px;margin-top:40px}
