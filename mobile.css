@@ -13,15 +13,13 @@
   .hero:not(.case-hero) .designer { top: calc(var(--ph) + 206px); }
   .hero:not(.case-hero) .location { bottom: 26px; }
 
-  /* ---------- Home: second screen fills the viewport ---------- */
-  .intro { min-height: 100svh; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 32px; padding-block: 56px; margin-block: 0; }
+  /* ---------- Home: second screen ---------- */
+  .intro { box-sizing: border-box; display: flex; flex-direction: column; gap: 32px; padding-block: 56px; margin-block: 0; }
   .intro h2,:lang(ru) .intro h2 { font-size: 36px; line-height: 1.05; letter-spacing: -.02em; white-space: normal; }
   .intro .intro-copy .statement { font-size: 28px; line-height: 1.12; letter-spacing: -.4px; }
   .intro .eyebrow,.intro-copy>.eyebrow { font-size: 13px; line-height: 1.45; }
-  /* the eyebrow belongs to the heading: keep them close, the rest of the screen breathes */
-  .intro { justify-content: flex-start; }
+  /* the eyebrow belongs to the heading: keep them close */
   .intro>.eyebrow+h2 { margin-top: -20px; }
-  .intro .portraits { margin-block: auto; }
 
   /* ---------- Section headings and statements ---------- */
   .section-heading h2,.about-heading h2,.more .section-heading h2 { font-size: 32px; line-height: 1.05; letter-spacing: -.02em; }
@@ -32,6 +30,10 @@
   /* ---------- Body copy: readable line height ---------- */
   .case-heading p,.pro-explanation,.case-section p:not(.case-conclusion):not(.pro-label),
   .intro p:not(.statement),.about-copy p,.gallery figcaption p,.job p,.project-caption p { font-size: 15px; line-height: 1.45; }
+  /* experience: the role, then the dates smaller and paler right under it */
+  .job p { line-height: 1.3; }
+  .job>div { gap: 4px; }
+  .job p.eyebrow { font-size: 13px; line-height: 1.3; opacity: .7; }
 
   /* ---------- Labels and controls: nothing below 12px ---------- */
   .case-breadcrumb,.case-breadcrumb a { font-size: 13px; }
@@ -88,7 +90,7 @@ footer .footer-inner nav a { padding-block: 12px; margin-block: -12px; }
 
 /* ---------- Header (Figma: Portfolio — Header, Variant 4) ----------
    Square white knobs 40×40, radius 8.889px, Inter 14.44px. Desktop: sun · EN · cv · contact me.
-   Phones and tablets: sun · EN — name (or breadcrumb) centred — CV · menu. */
+   Phones and tablets: name (or breadcrumb) on the left, then sun · EN · CV · menu. */
 html body .header .header-actions .theme-toggle { flex: 0 0 40px; width: 40px; height: 40px; min-width: 40px; padding: 10px; border: 0; border-radius: 8.889px; background: #fff; }
 html body .header .header-actions .theme-toggle .theme-sun { grid-area: 1/1; width: 20px; height: 20px; }
 html[data-theme="dark"] body .header .header-actions .theme-toggle { background: #161513; color: #f5efe5; }
@@ -99,12 +101,27 @@ html body .header .header-actions .language { min-width: 40px; height: 40px; pad
 [data-theme="dark"] .header .header-menu img { filter: invert(.915) hue-rotate(180deg); }
 
 @media (max-width: 1024px) {
-  html body .header { display: flex; align-items: center; justify-content: flex-start; gap: 12px !important; }
+  html body .header { display: flex; align-items: center; justify-content: flex-start; gap: 20px !important; }
   html body .header .header-actions { display: contents; }
+  html body .header .name,html body .header .case-breadcrumb { order: 0; flex: 1 1 auto; min-width: 0; justify-content: flex-start; text-align: left; font-size: 13px; letter-spacing: -.01em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: none; }
   html body .header .header-actions .theme-toggle { order: 1; }
   html body .header .header-actions .language { order: 2; flex: 0 0 40px; width: 40px; padding: 0; font: 400 14.444px/1 'Inter', 'Inter Tight', Arial, sans-serif; letter-spacing: -.01em; }
-  html body .header .name,html body .header .case-breadcrumb { order: 3; flex: 1 1 auto; min-width: 0; justify-content: center; text-align: center; font-size: 13px; letter-spacing: -.01em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: none; }
-  html body .header .header-actions .button[data-link="cv"] { order: 4; flex: 0 0 40px; width: 40px; height: 40px; min-width: 40px; padding: 0; border-radius: 8.889px; font: 400 14.444px/1 'Inter', 'Inter Tight', Arial, sans-serif; letter-spacing: -.01em; }
+  html body .header .header-actions .button[data-link="cv"] { order: 3; flex: 0 0 40px; width: 40px; height: 40px; min-width: 40px; padding: 0; border-radius: 8.889px; font: 400 14.444px/1 'Inter', 'Inter Tight', Arial, sans-serif; letter-spacing: -.01em; }
   html body .header .header-actions .button[href="#contact"] { display: none; }
-  html body .header .header-menu { display: block; order: 5; }
+  html body .header .header-menu { display: block; order: 4; }
+}
+@media (max-width: 380px) {
+  html body .header { gap: 12px !important; }
+}
+
+/* Phones and tablets: the heading stacks in its own column, starting under the sun in the header
+   (word-board.js gives the three lines one size and rhythm up to 800px). The location note lines up
+   with the name, its dot sits in the line so the left edge stays straight. */
+@media (min-width: 601px) and (max-width: 800px) {
+  .hero:not(.case-hero) .location { left: calc(40% + 12px); }
+  .hero:not(.case-hero) .ai-coded, .hero:not(.case-hero) .designer { left: calc(40% + 140px); right: auto; }
+}
+@media (max-width: 800px) {
+  .hero:not(.case-hero) .location { padding-left: 0; }
+  .hero:not(.case-hero) .status::before { position: static; display: inline-block; margin-right: 6px; vertical-align: .1em; }
 }

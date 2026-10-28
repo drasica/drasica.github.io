@@ -4,7 +4,7 @@
   const wordSets = {en: ['digital', 'visual', 'brand', 'marketing'], ru: ['диджитал', 'бренд', 'маркетинг', 'граф']};
   let words = wordSets[document.documentElement.lang] || wordSets.en;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  let index = 0, timer, frame, generation = 0;
+  let index = 0, timer, generation = 0;
   const glyphContext = document.createElement('canvas').getContext('2d');
   function fit() {
     const hero = document.querySelector('.hero-canvas');
@@ -12,6 +12,11 @@
     const first = hero.querySelector('.ai-coded');
     const last = hero.querySelector('.designer');
     [first, last].forEach(el => { el.style.top = ''; el.style.left = ''; el.style.fontSize = ''; el.style.whiteSpace = ''; });
+    // On phones and tablets the heading column starts under the sun in the header and ends with the header.
+    const stacked = innerWidth <= 800;
+    const knob = stacked && hero.querySelector('.header .header-actions .theme-toggle');
+    const header = hero.querySelector('.header');
+    if (knob && knob.offsetWidth) first.style.left = last.style.left = `${knob.getBoundingClientRect().left-bounds.left}px`;
     const anchor = first.getBoundingClientRect();
     const lastBounds = last.getBoundingClientRect();
     word.style.left = `${anchor.left-bounds.left}px`;
@@ -20,11 +25,12 @@
     const context = document.createElement('canvas').getContext('2d');
     context.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
     const russian = document.documentElement.lang === 'ru';
-    // On phones both languages get one size and one rhythm for all three lines.
+    // On phones and tablets both languages get one size and one rhythm for all three lines,
+    // stacked in a column to the right of the location note.
     const phone = innerWidth <= 600;
-    const uniform = russian || phone;
+    const uniform = russian || stacked;
     const longest = Math.max(...[...words, ...(uniform ? [first.textContent, last.textContent] : [])].map(text => context.measureText(text).width));
-    const available = bounds.right-anchor.left-20;
+    const available = (knob && knob.offsetWidth ? header.getBoundingClientRect().right : bounds.right-20)-anchor.left;
     const size = parseFloat(style.fontSize)*Math.min(1, available/longest);
     word.style.fontSize = `${size}px`;
     if (uniform) {
@@ -60,7 +66,7 @@
     }
     const shift = note ? baseline(note) - baseline(last) : 0;
     const lastTop = last.getBoundingClientRect().top - bounds.top + shift;
-    if (phone) {
+    if (stacked) {
       const step = size*1.12;
       last.style.top = `${lastTop}px`;
       word.style.top = `${lastTop-step}px`;
@@ -74,16 +80,18 @@
     glyphContext.font = `${fitted.fontWeight} ${fitted.fontSize} ${fitted.fontFamily}`;
 
   }
-  const ease = t => .5-Math.cos(Math.PI*Math.max(0,Math.min(1,t)))/2;
   function makeLetter(character) {
     const slot = document.createElement('span');
     slot.className = 'board-letter is-settled';
     slot.setAttribute('aria-hidden','true');
+    slot.append(makeFace(character));
+    return slot;
+  }
+  function makeFace(character) {
     const face = document.createElement('b');
     face.className = 'board-face';
     face.textContent = character;
-    slot.append(face);
-    return slot;
+    return face;
   }
   function settle() {
     word.replaceChildren(...[...words[index]].map(makeLetter));
@@ -93,56 +101,40 @@
   function schedule() {
     if (!document.hidden && !reduced.matches) timer = setTimeout(transition, 1500);
   }
+  // em width of one glyph at the fitted size
+  function glyphWidth(character) {
+    const fitted = getComputedStyle(word);
+    return character ? (glyphContext.measureText(character).width + (parseFloat(fitted.letterSpacing)||0)) / parseFloat(fitted.fontSize) : 0;
+  }
+  // Slot-machine reels: each letter spins through random glyphs and lands with a small bounce, left to right.
   function transition() {
     const previous = words[index];
     index = (index+1)%words.length;
     const target = words[index], token = ++generation;
-    // Keep the existing letters in place; only append genuinely new positions.
-    while(word.children.length < target.length) word.append(makeLetter(''));
-    fit();
-    const style = getComputedStyle(word);
-    const fontSize = parseFloat(style.fontSize);
-    const tracking = parseFloat(style.letterSpacing)||0;
-    const widthOf = char => char ? (glyphContext.measureText(char).width+tracking)/fontSize : 0;
-    const slots = [...word.children].map((slot,i) => ({
-      slot, face:slot.firstElementChild, old:previous[i]||'', next:target[i]||'',
-      from:widthOf(previous[i]), to:widthOf(target[i]), delay:i*125
+    const pool = [...new Set(words.join(''))];
+    const runs = [];
+    word.replaceChildren(...[...Array(Math.max(previous.length, target.length))].map((_, i) => {
+      const old = previous[i]||'', next = target[i]||'';
+      const duration = 620 + i*70, delay = i*35;
+      // the cell clips its reel and eases its width from the old glyph to the new one
+      const cell = makeLetter('');
+      cell.classList.add('reel-cell');
+      cell.firstElementChild.remove();
+      cell.animate([{ width: `${glyphWidth(old)}em` }, { width: `${glyphWidth(next)}em` }], { duration, delay, easing: 'cubic-bezier(.6,0,.2,1)', fill: 'both' });
+      const strip = document.createElement('span');
+      strip.className = 'reel-strip';
+      const glyphs = [old, ...Array.from({ length: 4 + i }, () => pool[Math.random()*pool.length|0]), next];
+      strip.append(...glyphs.map(makeFace));
+      cell.append(strip);
+      runs.push(strip.animate([{ transform: 'translateY(0)' }, { transform: `translateY(${-(glyphs.length-1)*1.5}em)` }], { duration, delay, easing: 'cubic-bezier(.3,0,.3,1.25)', fill: 'both' }).finished);
+      return cell;
     }));
-    const start=performance.now();
-    function animate(now) {
-      if(token!==generation)return;
-      const elapsed=now-start;
-      slots.forEach(({slot,face,old,next,from,to,delay})=>{
-        const local=elapsed-delay;
-        const duration=620;
-        const progress=Math.max(0,Math.min(1,local/duration));
-        const turning=local>0&&local<duration;
-        // A full flip starts from the old glyph and finishes on the new one.
-        const cycles=2;
-        const phase=progress*cycles;
-        const fraction=phase%1;
-        face.textContent=progress===1?next:progress===0?old:(fraction<.5?old:next)||old||next;
-        const angle=turning?(fraction<.5?-180*fraction:180*(1-fraction)):0;
-        face.style.transform=`perspective(500px) rotateX(${angle}deg)`;
-        const wide=Math.max(from,to);
-        const width=progress<.5?from+(wide-from)*ease(progress*2):wide+(to-wide)*ease((progress-.5)*2);
-        slot.style.width=`${width}em`;
-        slot.style.opacity=old&&next?'1':String(old?1-ease(progress):ease(progress));
-        slot.className=`board-letter ${turning?'is-turning':'is-settled'}`;
-      });
-      if(elapsed>=620+(slots.length-1)*125) {
-        slots.forEach(({slot,face,next})=>{
-          if(!next){slot.remove();return;}
-          face.textContent=next;face.style.transform='';
-          slot.style.width='';slot.style.opacity='';slot.className='board-letter is-settled';
-        });
-        word.setAttribute('aria-label',target);fit();schedule();
-      } else frame=requestAnimationFrame(animate);
-    }
-    frame=requestAnimationFrame(animate);
+    word.setAttribute('aria-label', target);
+    const done = () => { if (token !== generation) return; settle(); schedule(); };
+    Promise.all(runs).then(done, done);
   }
   function reset() {
-    clearTimeout(timer); cancelAnimationFrame(frame); generation++;
+    clearTimeout(timer); generation++;
     settle(); schedule();
   }
   document.addEventListener('portfolio-language-change', () => {
