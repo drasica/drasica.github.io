@@ -1,7 +1,8 @@
 /* Phones: the docked pill stays compact and opens a white sheet of grouped links above it (after maxshirko.me). */
 .mm-sheet { display: none; }
 @media (max-width: 700px) {
-  html body .hero .header .menu-anchor.is-open { width: 208px; }
+  /* logo · language · theme · close (40 + 40 + 40 + 48) with 8px gaps and 8px padding on both sides */
+  html body .hero .header .menu-anchor.is-open { width: 216px; }
   html body .hero .header .menu-anchor .menu-panel { display: none !important; }
   html body .hero .header .menu-anchor .mm-sheet { position: absolute; left: 50%; bottom: calc(100% + 10px); width: calc(100vw - 32px); box-sizing: border-box; grid-template-columns: 1fr 1fr; column-gap: 32px; row-gap: 28px; padding: 32px 28px 36px; max-height: calc(100svh - 130px); overflow-y: auto; overscroll-behavior: contain; border-radius: 32px; background: #fff; color: var(--ink); box-shadow: 0 12px 40px rgba(22, 47, 66, .16); font-family: 'Inter Tight', Inter, Arial, sans-serif; transform: translateX(-50%); transform-origin: 50% 100%; }
   html body .hero .header .menu-anchor.is-open .mm-sheet { display: grid; animation: mm-in .45s cubic-bezier(.2, 1.2, .4, 1) both; }
