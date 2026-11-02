@@ -30,10 +30,9 @@
   /* ---------- Body copy: readable line height ---------- */
   .case-heading p,.pro-explanation,.case-section p:not(.case-conclusion):not(.pro-label),
   .intro p:not(.statement),.about-copy p,.gallery figcaption p,.job p,.project-caption p { font-size: 15px; line-height: 1.45; }
-  /* experience: the role, then the dates smaller and paler right under it */
+  /* experience: the role, then the dates smaller and paler right under it (styles.css) */
   .job p { line-height: 1.3; }
-  .job>div { gap: 4px; }
-  .job p.eyebrow { font-size: 13px; line-height: 1.3; opacity: .7; }
+  .job p.eyebrow { font-size: 13px; }
 
   /* ---------- Labels and controls: nothing below 12px ---------- */
   .case-breadcrumb,.case-breadcrumb a { font-size: 13px; }
