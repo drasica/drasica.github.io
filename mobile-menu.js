@@ -11,7 +11,7 @@
     en: { nav: 'Navigation', projects: 'Projects', contact: 'Contact', social: 'Social', home: 'home', experience: 'experience', all: 'all projects', about: 'about', soon: 'soon', write: 'Contact me' },
     ru: { nav: 'Навигация', projects: 'Проекты', contact: 'Связаться', social: 'Соцсети', home: 'главная', experience: 'опыт', all: 'все проекты', about: 'обо мне', soon: 'скоро', write: 'Связаться со мной' },
   };
-  const PROJECTS = [['tanu.html', 'TANU'], ['proriski.html', 'ProRiski'], ['enta.html', 'MPP × ENTA'], ['aurus.html', 'Aurus'], ['leaf-tower.html', 'Leaf Tower'], ['penthouse.html', 'Penthouse']];
+  const PROJECTS = [['proriski.html', 'ProRiski'], ['enta.html', 'MPP × ENTA'], ['tanu.html', 'TANU'], ['aurus.html', 'Aurus'], ['leaf-tower.html', 'Leaf Tower'], ['penthouse.html', 'Penthouse']];
   const ext = ' target="_blank" rel="noopener noreferrer"';
   const link = (url, text, extra = '') => `<a class="mm-link" href="${url}"${extra}>${text}</a>`;
 
