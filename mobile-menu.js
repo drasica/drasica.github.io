@@ -28,13 +28,13 @@
       ${link(href('.social-instagram'), 'Instagram', ext)}${link(href('.social-threads'), 'Threads', ext)}${link(href('.social-linkedin'), 'LinkedIn', ext)}</div>`;
   anchor.append(sheet);
 
-  // phones and tablets: an envelope in place of the header burger, leading down to the contact footer
-  document.querySelectorAll('.header .header-menu').forEach(menu => {
+  // phones and tablets: the header ends with an envelope leading down to the contact footer
+  document.querySelectorAll('.header .header-actions').forEach(actions => {
     const plane = document.createElement('a');
     plane.className = 'header-contact';
     plane.href = '#contact';
     plane.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m6.5 9.5 4.3 3.1a2 2 0 0 0 2.4 0l4.3-3.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    menu.after(plane);
+    actions.append(plane);
   });
 
   sheet.addEventListener('click', event => {

@@ -83,14 +83,5 @@
   window.addEventListener('resize', sizeMenu);
   document.fonts.ready.then(sizeMenu);
   new MutationObserver(sizeMenu).observe(panel, {subtree:true, childList:true, characterData:true});
-  // the header's own menu button (phones and tablets) brings the menu pill in and opens it
-  const headerMenus = document.querySelectorAll('.header-menu');
-  headerMenus.forEach(open => open.addEventListener('click', event => {
-    event.stopPropagation();
-    setVisible(true);
-    if (panel.hidden) button.click();
-  }));
-  new MutationObserver(() => headerMenus.forEach(b => b.setAttribute('aria-label', document.documentElement.lang === 'ru' ? 'Открыть навигацию' : 'Open navigation')))
-    .observe(document.documentElement, {attributes: true, attributeFilter: ['lang']});
   label(); position();
 })();

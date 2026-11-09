@@ -321,10 +321,6 @@ window.portfolioAltTranslations = {
     "en": "Aurus",
     "ru": "Aurus"
   },
-  "alt5": {
-    "en": "MPP × ENTA",
-    "ru": "MPP × ENTA"
-  },
   "alt6": {
     "en": "ProRiski",
     "ru": "ProRiski"
