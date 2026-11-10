@@ -130,10 +130,10 @@ h3 { font-size: clamp(23px, 2.1vw, 28px); line-height: 1.15; letter-spacing: -.0
 .project-caption { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 24px; margin-top: 20px; }
 .project-caption .eyebrow { margin-top: 18px; }
 .tags { margin-top: 16px; color: var(--muted); }
-/* narrow slots stack the caption tighter */
+/* narrow slots stack the caption tighter; the title column still fits its longest word */
 @media(min-width:801px) {
   .project-grid:not(.is-filtered) .project:is(:nth-child(2),:nth-child(4),:nth-child(5)) .project-caption,
-  .project-grid.is-filtered .project:is([data-layout='1'],[data-layout='2'],[data-layout='5']) .project-caption { grid-template-columns: 100px minmax(0,1fr); gap: 16px; }
+  .project-grid.is-filtered .project:is([data-layout='1'],[data-layout='2'],[data-layout='5']) .project-caption { grid-template-columns: minmax(100px, min-content) minmax(0,1fr); gap: 16px; }
 }
 
 .about { margin-block: var(--section-space); }
